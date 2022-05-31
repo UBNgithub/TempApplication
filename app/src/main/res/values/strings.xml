@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TempApplication</string>
+    <string name="cheboksary">Cheboksary</string>
+    <string name="kazan">Kazan</string>
+    <string name="nizhniy_novgorod">Nizhniy Novgorod</string>
+    <string name="moscow">Moscow</string>
+</resources>
