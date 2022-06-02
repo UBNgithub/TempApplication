@@ -7,6 +7,14 @@
     android:orientation="vertical"
     tools:context=".CityActivity" >
 
+    <EditText
+        android:id="@+id/edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:hint="Input city"
+        android:textSize="20sp" />
+
     <TextView
         android:id="@+id/textViewMsc"
         android:layout_width="match_parent"
