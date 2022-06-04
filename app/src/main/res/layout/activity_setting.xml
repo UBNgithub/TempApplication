@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pad"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -17,19 +18,19 @@
         android:textSize="20sp" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/checkBoxHimidity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Влажность" />
 
     <CheckBox
-        android:id="@+id/checkBox2"
+        android:id="@+id/checkBoxSpeedWind"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Скорость ветра" />
 
     <CheckBox
-        android:id="@+id/checkBox3"
+        android:id="@+id/checkBoxPrecipitation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Осадки" />
@@ -38,12 +39,47 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="8dp"
         android:text="Изменение темы:"
         android:textSize="20sp" />
 
-    <Switch
+    <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switch2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:padding="8dp"
         android:text="Темная тема" />
+
+    <TextView
+        android:id="@+id/textViewHim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        tools:text="Влажность" />
+
+    <TextView
+        android:id="@+id/changeTemp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        tools:text="Изменение температуры :" />
+
+    <Button
+        android:id="@+id/tempPlus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="T+" />
+
+    <Button
+        android:id="@+id/tempMinus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="T-" />
+
+    <Button
+        android:id="@+id/setTemp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="set temperature" />
 </LinearLayout>

@@ -17,18 +17,24 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     TextView dateText;
+    TextView mTemperature;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         dateText = findViewById(R.id.textViewDate);
         Date date = new Date();
         dateText.setText(date.toString());
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Moscow");
+
+        int temp = Singleton.getSingleton().temperature;
+        mTemperature = findViewById(R.id.temperatureTV);
+        mTemperature.setText(Integer.toString(temp) + " °");
+
     }
 
     @Override
