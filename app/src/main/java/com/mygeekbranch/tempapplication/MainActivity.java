@@ -8,19 +8,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity   implements Constants  {
+public class MainActivity extends AppCompatActivity implements Constants {
     private final static int REQUEST_CODE = 1;
     TextView dateText;
     TextView mTemperature;
     TextView mPasmurno;
+    ActionBar actionBar;
+    Button mAboutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +36,26 @@ public class MainActivity extends AppCompatActivity   implements Constants  {
         Date date = new Date();
         dateText.setText(date.toString());
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Moscow");
+        actionBar = getSupportActionBar();
+        actionBar.setTitle("Kazan");
 
         int temp = Singleton.getSingleton().temperature;
         mTemperature = findViewById(R.id.temperatureTV);
         mTemperature.setText(Integer.toString(temp) + " °");
         mPasmurno = findViewById(R.id.weatherTV);
+        mAboutButton = findViewById(R.id.aboutCityButton);
+
+        mAboutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String city = actionBar.getTitle().toString();
+                String url = "https://ru.wikipedia.org/wiki/"+ city;
+
+                Uri uri = Uri.parse(url);
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -57,11 +75,11 @@ public class MainActivity extends AppCompatActivity   implements Constants  {
                 return true;
 
             case R.id.city:
-                Intent intent1  = new Intent(MainActivity.this, CityActivity.class);
+                Intent intent1 = new Intent(MainActivity.this, CityActivity.class);
                 //startActivity(intent1);
-                startActivityForResult(intent1,REQUEST_CODE);
+                startActivityForResult(intent1, REQUEST_CODE);
 
-                return  true;
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -69,18 +87,18 @@ public class MainActivity extends AppCompatActivity   implements Constants  {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode != REQUEST_CODE){
+        if (requestCode != REQUEST_CODE) {
             super.onActivityResult(requestCode, resultCode, data);
-        return;}
+            return;
+        }
         if (resultCode == RESULT_OK) {
-
-            mPasmurno.setText(data.getStringExtra(RESULT));
+            actionBar.setTitle(data.getStringExtra(RESULT));
         }
     }
 
 
-    public  void ClickItem5(MenuItem item){
-        Toast.makeText(MainActivity.this,"Вы выбрали 5- пункт меню", Toast.LENGTH_LONG).show();
+    public void ClickItem5(MenuItem item) {
+        Toast.makeText(MainActivity.this, "Вы выбрали 5- пункт меню", Toast.LENGTH_LONG).show();
     }
 
 
