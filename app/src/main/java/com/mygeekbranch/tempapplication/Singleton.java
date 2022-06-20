@@ -3,9 +3,13 @@ package com.mygeekbranch.tempapplication;
 public class Singleton {
     private static Singleton sSingleton;
     int temperature;
+    private boolean isCheckHumidity;
+    private boolean isCheckNightMode;
 
     public Singleton() {
-        temperature= 0;
+        temperature = 0;
+        isCheckHumidity = false;
+        isCheckNightMode = false;
 
     }
 
@@ -18,11 +22,29 @@ public class Singleton {
     public int getTemperature() {
         return temperature;
     }
-    public  void increaseTemperature(){
+
+    public boolean isCheckHumidity() {
+        return isCheckHumidity;
+    }
+
+    public void setCheckHumidity(boolean checkHumidity) {
+        isCheckHumidity = checkHumidity;
+    }
+
+    public boolean isCheckNightMode() {
+        return isCheckNightMode;
+    }
+
+    public void setCheckNightMode(boolean checkNightMode) {
+        isCheckNightMode = checkNightMode;
+    }
+
+    public void increaseTemperature() {
         temperature++;
 
     }
-    public  void decreaseTemperature(){
+
+    public void decreaseTemperature() {
         temperature--;
     }
 

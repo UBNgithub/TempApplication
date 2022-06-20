@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -21,11 +22,15 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements Constants {
     private final static int REQUEST_CODE = 1;
+
     TextView dateText;
     TextView mTemperature;
     TextView mPasmurno;
     ActionBar actionBar;
     Button mAboutButton;
+    Button mCityButton;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,16 @@ public class MainActivity extends AppCompatActivity implements Constants {
         mTemperature.setText(Integer.toString(temp) + " °");
         mPasmurno = findViewById(R.id.weatherTV);
         mAboutButton = findViewById(R.id.aboutCityButton);
+        mCityButton = findViewById(R.id.cityButton);
+        mCityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+           Intent intent =new Intent(MainActivity.this, TwoActivity.class);
+           intent.putExtra("fr", 2);
+           startActivity(intent);
+
+            }
+        });
 
         mAboutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,15 +84,18 @@ public class MainActivity extends AppCompatActivity implements Constants {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item1:
-                Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+                Intent intent = new Intent(MainActivity.this, TwoActivity.class);
+                intent.putExtra("fr",1);
                 startActivity(intent);
                 Toast.makeText(MainActivity.this, "Clic setting", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.city:
-                Intent intent1 = new Intent(MainActivity.this, CityActivity.class);
-                //startActivity(intent1);
-                startActivityForResult(intent1, REQUEST_CODE);
+
+                Intent intent1 = new Intent(MainActivity.this, TwoActivity.class);
+                intent1.putExtra("fr",2);
+                startActivity(intent1);
+
 
                 return true;
             default:

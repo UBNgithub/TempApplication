@@ -61,4 +61,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textViewDate" />
 
+    <Button
+        android:id="@+id/cityButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="City"
+        app:layout_constraintStart_toStartOf="@+id/aboutCityButton"
+        app:layout_constraintTop_toBottomOf="@+id/aboutCityButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

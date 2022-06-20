@@ -2,12 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/pad"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="8dp"
-    tools:context=".SettingActivity">
+    tools:context=".SettingFragment">
 
 
     <TextView
@@ -77,9 +76,5 @@
         android:layout_height="wrap_content"
         android:text="T-" />
 
-    <Button
-        android:id="@+id/setTemp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="set temperature" />
+   
 </LinearLayout>
