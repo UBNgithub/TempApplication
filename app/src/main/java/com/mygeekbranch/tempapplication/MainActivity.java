@@ -7,6 +7,9 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -18,7 +21,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements Constants {
     private final static int REQUEST_CODE = 1;
@@ -29,6 +34,10 @@ public class MainActivity extends AppCompatActivity implements Constants {
     ActionBar actionBar;
     Button mAboutButton;
     Button mCityButton;
+
+    List< WeekWeatherModel> weekList;
+
+
 
 
 
@@ -71,6 +80,8 @@ public class MainActivity extends AppCompatActivity implements Constants {
                 startActivity(intent);
             }
         });
+        initListWeekWeather();
+        initRecyclerView();
 
     }
 
@@ -118,6 +129,30 @@ public class MainActivity extends AppCompatActivity implements Constants {
     public void ClickItem5(MenuItem item) {
         Toast.makeText(MainActivity.this, "Вы выбрали 5- пункт меню", Toast.LENGTH_LONG).show();
     }
+    private   void initRecyclerView(){
+        RecyclerView recyclerView = findViewById(R.id.week_recyclerView);
+        recyclerView.setHasFixedSize(true);
+        //Декоратор
+        DividerItemDecoration decoration = new DividerItemDecoration(this, LinearLayoutManager.VERTICAL);
+
+        LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        WeekAdapter adapter = new WeekAdapter(weekList);
+        recyclerView.setAdapter(adapter);
+    }
+    private  void initListWeekWeather(){
+        weekList = new ArrayList<>();
+        weekList.add(new WeekWeatherModel("ПН", "+9°"));
+        weekList.add(new WeekWeatherModel("ВТ", "+5°"));
+        weekList.add(new WeekWeatherModel("СР", "+4°"));
+        weekList.add(new WeekWeatherModel("ЧТ", "+10°"));
+        weekList.add(new WeekWeatherModel("ПT", "+12°"));
+        weekList.add(new WeekWeatherModel("СБ", "+18°"));
+        weekList.add(new WeekWeatherModel("ВС", "+20°"));
+    }
+
+
+
 
 
 }
