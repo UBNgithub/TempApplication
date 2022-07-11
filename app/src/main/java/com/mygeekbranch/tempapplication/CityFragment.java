@@ -7,12 +7,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,11 +26,12 @@ import android.widget.TextView;
  * create an instance of this fragment.
  */
 public class CityFragment extends Fragment {
-    TextView moscow;
-    TextView cheboksary;
-    TextView kazan;
-    TextView nizhniy_novgorod;
-    EditText mEditText;
+
+    Button setCity;
+
+    public EditText mEditText;
+    public List<String> cityList = Singleton.getSingleton().getCityList();
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -63,26 +70,56 @@ public class CityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_city, container, false);
+        return inflater.inflate(R.layout.fragment_city_2, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("City");
-        mEditText  = view.findViewById(R.id.edit_text);
-        moscow = view.findViewById(R.id.textViewMsc);
-        moscow.setOnClickListener(new View.OnClickListener() {
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("City");
+        mEditText = view.findViewById(R.id.edit_text);
+
+        setCity = view.findViewById(R.id.set_city);
+        setCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentResult = new Intent();
-//                intentResult.putExtra(RESULT, mEditText.getText().toString());
-//                setResult(RESULT_OK, intentResult);
+                cityList.add(mEditText.getText().toString());
+                Singleton.getSingleton().setCurrentCity(mEditText.getText().toString());
                 getActivity().finish();
+
             }
         });
+
+        //initCityList();
+        initRecyclerViewCity(view);
 
 
 
     }
+
+    public void initRecyclerViewCity(View view) {
+        RecyclerView recyclerView = view.findViewById(R.id.city_recyclerview);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        CityAdapter adapter = new CityAdapter(cityList);
+        recyclerView.setAdapter(adapter);
+    }
+
+    public void initCityList() {
+        cityList = new ArrayList<>();
+        cityList.add("Moscow");
+        cityList.add("Moscow1");
+        cityList.add("Moscow2");
+        cityList.add("Moscow3");
+        cityList.add("Moscow4");
+        cityList.add("Moscow5");
+        cityList.add("Moscow6");
+        cityList.add("Moscow7");
+        cityList.add("Moscow8");
+    }
+
+
+
+
 }

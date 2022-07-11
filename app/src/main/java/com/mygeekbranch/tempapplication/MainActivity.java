@@ -51,7 +51,8 @@ public class MainActivity extends AppCompatActivity implements Constants {
         dateText.setText(date.toString());
 
         actionBar = getSupportActionBar();
-        actionBar.setTitle("Kazan");
+       // actionBar.setTitle("Kazan");
+        //actionBar.setTitle(Singleton.getSingleton().getCurrentCity());
 
         int temp = Singleton.getSingleton().temperature;
         mTemperature = findViewById(R.id.temperatureTV);
@@ -82,6 +83,13 @@ public class MainActivity extends AppCompatActivity implements Constants {
         });
         initListWeekWeather();
         initRecyclerView();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        actionBar.setTitle(Singleton.getSingleton().getCurrentCity());
 
     }
 
@@ -134,6 +142,9 @@ public class MainActivity extends AppCompatActivity implements Constants {
         recyclerView.setHasFixedSize(true);
         //Декоратор
         DividerItemDecoration decoration = new DividerItemDecoration(this, LinearLayoutManager.VERTICAL);
+        decoration.setDrawable(getDrawable(R.drawable.item_separator));
+        recyclerView.addItemDecoration(decoration);
+
 
         LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
