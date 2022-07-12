@@ -68,7 +68,8 @@
         android:id="@+id/tempPlus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="T+" />
+        android:text="T+"
+        app:cornerRadius="10dp" />
 
     <Button
         android:id="@+id/tempMinus"

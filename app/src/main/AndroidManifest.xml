@@ -17,10 +17,7 @@
             android:name=".TwoActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity"/>
-        <activity
-            android:name=".CityActivity"
-            android:exported="false"
-            android:parentActivityName=".MainActivity" />
+
 
         <activity
             android:name=".MainActivity"

@@ -32,8 +32,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
     TextView mTemperature;
     TextView mPasmurno;
     ActionBar actionBar;
-    Button mAboutButton;
-    Button mCityButton;
+
 
     List< WeekWeatherModel> weekList;
 
@@ -45,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         dateText = findViewById(R.id.textViewDate);
         Date date = new Date();
@@ -58,29 +58,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
         mTemperature = findViewById(R.id.temperatureTV);
         mTemperature.setText(Integer.toString(temp) + " °");
         mPasmurno = findViewById(R.id.weatherTV);
-        mAboutButton = findViewById(R.id.aboutCityButton);
-        mCityButton = findViewById(R.id.cityButton);
-        mCityButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-           Intent intent =new Intent(MainActivity.this, TwoActivity.class);
-           intent.putExtra("fr", 2);
-           startActivity(intent);
 
-            }
-        });
-
-        mAboutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String city = actionBar.getTitle().toString();
-                String url = "https://ru.wikipedia.org/wiki/"+ city;
-
-                Uri uri = Uri.parse(url);
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
-            }
-        });
         initListWeekWeather();
         initRecyclerView();
 
