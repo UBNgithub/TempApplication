@@ -5,25 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".TwoActivity">
+    tools:context=".TwoActivity"
+    android:id="@+id/linearLayout">
 
-    <EditText
-        android:id="@+id/edit_text"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Input city"
-        android:padding="16dp"
-        android:textSize="20sp" />
+        android:layout_height="match_parent"
+        android:id="@+id/text_input_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_input_edittext"
+            android:hint="Введите город" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/set_city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="set city" />
+        android:text="set city"
+        tools:layout_conversion_absoluteHeight="48dp"
+        tools:layout_editor_absoluteY="59dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_conversion_absoluteWidth="101dp"
+        style="@style/ButtonColorBlack" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/city_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_conversion_absoluteHeight="300dp"
+        tools:layout_editor_absoluteY="107dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_conversion_absoluteWidth="411dp" />
 
 </LinearLayout>

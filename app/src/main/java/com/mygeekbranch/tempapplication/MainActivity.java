@@ -21,6 +21,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
                 intent.putExtra("fr",1);
                 startActivity(intent);
                 Toast.makeText(MainActivity.this, "Clic setting", Toast.LENGTH_SHORT).show();
+
                 return true;
 
             case R.id.city:

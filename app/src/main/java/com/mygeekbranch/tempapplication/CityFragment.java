@@ -16,6 +16,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +33,7 @@ public class CityFragment extends Fragment {
 
     Button setCity;
 
-    public EditText mEditText;
+    public TextInputEditText mEditText;
     public List<String> cityList = Singleton.getSingleton().getCityList();
 
 
@@ -77,7 +81,7 @@ public class CityFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("City");
-        mEditText = view.findViewById(R.id.edit_text);
+        mEditText = view.findViewById(R.id.text_input_edittext);
 
         setCity = view.findViewById(R.id.set_city);
         setCity.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +89,20 @@ public class CityFragment extends Fragment {
             public void onClick(View view) {
                 cityList.add(mEditText.getText().toString());
                 Singleton.getSingleton().setCurrentCity(mEditText.getText().toString());
-                getActivity().finish();
+
+                Snackbar.make(view, "Подтвердите выбор", Snackbar.LENGTH_LONG).setAction("Ok",
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Toast.makeText(getContext(),"set city", Toast.LENGTH_SHORT).show();
+                                cityList.add(mEditText.getText().toString());
+                                Singleton.getSingleton().setCurrentCity(mEditText.getText().toString());
+                                 getActivity().finish();
+
+                            }
+                        }).show();
+
+               // getActivity().finish();
 
             }
         });
