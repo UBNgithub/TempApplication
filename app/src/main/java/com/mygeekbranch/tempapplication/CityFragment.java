@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +33,7 @@ import java.util.List;
 public class CityFragment extends Fragment {
 
     Button setCity;
+    Toolbar toolbar;
 
     public TextInputEditText mEditText;
     public List<String> cityList = Singleton.getSingleton().getCityList();
@@ -80,7 +82,7 @@ public class CityFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("City");
+        // ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("City");
         mEditText = view.findViewById(R.id.text_input_edittext);
 
         setCity = view.findViewById(R.id.set_city);
@@ -94,22 +96,22 @@ public class CityFragment extends Fragment {
                         new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Toast.makeText(getContext(),"set city", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "set city", Toast.LENGTH_SHORT).show();
                                 cityList.add(mEditText.getText().toString());
                                 Singleton.getSingleton().setCurrentCity(mEditText.getText().toString());
-                                 getActivity().finish();
-
+                                getActivity().finish();
                             }
                         }).show();
-
-               // getActivity().finish();
 
             }
         });
 
-        //initCityList();
-        initRecyclerViewCity(view);
+        toolbar = (Toolbar)getActivity().findViewById(R.id.toolbar);
+        toolbar.setTitle("City");
 
+
+
+        initRecyclerViewCity(view);
 
 
     }
@@ -121,19 +123,6 @@ public class CityFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         CityAdapter adapter = new CityAdapter(cityList);
         recyclerView.setAdapter(adapter);
-    }
-
-    public void initCityList() {
-        cityList = new ArrayList<>();
-        cityList.add("Moscow");
-        cityList.add("Moscow1");
-        cityList.add("Moscow2");
-        cityList.add("Moscow3");
-        cityList.add("Moscow4");
-        cityList.add("Moscow5");
-        cityList.add("Moscow6");
-        cityList.add("Moscow7");
-        cityList.add("Moscow8");
     }
 
 

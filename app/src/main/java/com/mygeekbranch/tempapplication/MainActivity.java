@@ -3,25 +3,18 @@ package com.mygeekbranch.tempapplication;
 import androidx.annotation.NonNull;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.fragment.app.FragmentManager;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
     TextView dateText;
     TextView mTemperature;
     TextView mPasmurno;
-    ActionBar actionBar;
+    Toolbar toolbar;
 
 
     List< WeekWeatherModel> weekList;
@@ -51,8 +44,10 @@ public class MainActivity extends AppCompatActivity implements Constants {
         dateText = findViewById(R.id.textViewDate);
         Date date = new Date();
         dateText.setText(date.toString());
+        toolbar =findViewById(R.id.toolbar2);
+        setSupportActionBar(toolbar);
 
-        actionBar = getSupportActionBar();
+        //toolbar = getSupportActionBar();
        // actionBar.setTitle("Kazan");
         //actionBar.setTitle(Singleton.getSingleton().getCurrentCity());
 
@@ -69,7 +64,8 @@ public class MainActivity extends AppCompatActivity implements Constants {
     @Override
     protected void onResume() {
         super.onResume();
-        actionBar.setTitle(Singleton.getSingleton().getCurrentCity());
+       // actionBar.setTitle(Singleton.getSingleton().getCurrentCity());
+       toolbar.setTitle(Singleton.getSingleton().getCurrentCity());
 
     }
 
@@ -110,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
             return;
         }
         if (resultCode == RESULT_OK) {
-            actionBar.setTitle(data.getStringExtra(RESULT));
+            toolbar.setTitle(data.getStringExtra(RESULT));
         }
     }
 

@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -31,6 +32,7 @@ public class SettingFragment extends Fragment {
     Button mIncTemperature;
     Button mDecTemperature;
     TextView mChangeTempText;
+    Toolbar toolbar;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -82,7 +84,7 @@ public class SettingFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Fragment Setting");
+        //((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Fragment Setting");
 
         isCheckNightMode = Singleton.getSingleton().isCheckNightMode();
         mSwitch = view.findViewById(R.id.switch2);
@@ -138,6 +140,11 @@ public class SettingFragment extends Fragment {
                 mChangeTempText.setText("Температура : " + mTemperature + " °");
             }
         });
+
+        //((AppCompatActivity) getActivity()).getSupportActionBar(toolbar);
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        toolbar.setTitle("Setting");
+
 
 
     }

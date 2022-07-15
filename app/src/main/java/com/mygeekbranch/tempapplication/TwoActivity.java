@@ -1,16 +1,21 @@
 package com.mygeekbranch.tempapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 // Временое активити для переноса перехода приложения на фрагменты
 public class TwoActivity extends AppCompatActivity {
+    Toolbar toolbar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_two);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Activity 2");
+        setSupportActionBar(toolbar);
 
         int numberFragment = getIntent().getExtras().getInt("fr");
         if ( numberFragment == 2) {
