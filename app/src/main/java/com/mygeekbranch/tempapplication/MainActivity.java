@@ -94,6 +94,18 @@ public class MainActivity extends AppCompatActivity implements Constants {
 
 
                 return true;
+            case R.id.about:
+
+                Intent intent2 = new Intent(MainActivity.this, TwoActivity.class);
+                intent2.putExtra("fr",3);
+                startActivity(intent2);
+
+
+                return true;
+
+
+
+
             default:
                 return super.onOptionsItemSelected(item);
         }

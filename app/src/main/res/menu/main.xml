@@ -12,5 +12,10 @@
         android:icon="@drawable/city"
         android:title="City"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/about"
+        android:icon="@drawable/about"
+        android:title="City"
+        app:showAsAction="ifRoom" />
 
 </menu>

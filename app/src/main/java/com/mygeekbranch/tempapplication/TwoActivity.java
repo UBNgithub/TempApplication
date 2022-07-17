@@ -23,7 +23,16 @@ public class TwoActivity extends AppCompatActivity {
                     .beginTransaction()
                     .replace(R.id.fragment_container, CityFragment.newInstance(null, null))
                     .commit();
-        } else {
+
+        } else
+        if ( numberFragment == 3) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, AboutFragment.newInstance(null, null))
+                    .commit();
+
+        }
+        else {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, SettingFragment.newInstance(null, null))
