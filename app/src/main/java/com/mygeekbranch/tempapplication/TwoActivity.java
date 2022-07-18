@@ -16,6 +16,8 @@ public class TwoActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Activity 2");
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         int numberFragment = getIntent().getExtras().getInt("fr");
         if ( numberFragment == 2) {

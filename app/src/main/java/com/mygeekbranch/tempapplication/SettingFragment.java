@@ -147,6 +147,7 @@ public class SettingFragment extends Fragment {
 
 
 
+
     }
 
     public void setTextViewHim() {

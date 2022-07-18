@@ -16,6 +16,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +29,30 @@ public class MainActivity extends AppCompatActivity implements Constants {
     TextView mTemperature;
     TextView mPasmurno;
     Toolbar toolbar;
+    private  BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()){
+                case R.id.navigation_setting:
+                    Intent intent = new Intent(MainActivity.this, TwoActivity.class);
+                    intent.putExtra("fr",1);
+                    startActivity(intent);
+                    return true;
+                case R.id.navigation_city:
+                    Intent intent1 = new Intent(MainActivity.this, TwoActivity.class);
+                    intent1.putExtra("fr",2);
+                    startActivity(intent1);
+                    return true;
+                case R.id.navigation_about:
+                    Intent intent2 = new Intent(MainActivity.this, TwoActivity.class);
+                    intent2.putExtra("fr",3);
+                    startActivity(intent2);
+                    return true;
+            }
+            return false;
+        }
+    };
 
 
     List< WeekWeatherModel> weekList;
@@ -47,14 +73,16 @@ public class MainActivity extends AppCompatActivity implements Constants {
         toolbar =findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
 
-        //toolbar = getSupportActionBar();
-       // actionBar.setTitle("Kazan");
-        //actionBar.setTitle(Singleton.getSingleton().getCurrentCity());
+
+
 
         int temp = Singleton.getSingleton().temperature;
         mTemperature = findViewById(R.id.temperatureTV);
         mTemperature.setText(Integer.toString(temp) + " °");
         mPasmurno = findViewById(R.id.weatherTV);
+        mPasmurno.setText("Пасмурно");
+        BottomNavigationView navigationView = findViewById(R.id.bottomNavigationView);
+        navigationView.setOnNavigationItemSelectedListener(itemSelectedListener);
 
         initListWeekWeather();
         initRecyclerView();
@@ -83,29 +111,17 @@ public class MainActivity extends AppCompatActivity implements Constants {
                 intent.putExtra("fr",1);
                 startActivity(intent);
                 Toast.makeText(MainActivity.this, "Clic setting", Toast.LENGTH_SHORT).show();
-
                 return true;
-
             case R.id.city:
-
                 Intent intent1 = new Intent(MainActivity.this, TwoActivity.class);
                 intent1.putExtra("fr",2);
                 startActivity(intent1);
-
-
                 return true;
             case R.id.about:
-
                 Intent intent2 = new Intent(MainActivity.this, TwoActivity.class);
                 intent2.putExtra("fr",3);
                 startActivity(intent2);
-
-
                 return true;
-
-
-
-
             default:
                 return super.onOptionsItemSelected(item);
         }
