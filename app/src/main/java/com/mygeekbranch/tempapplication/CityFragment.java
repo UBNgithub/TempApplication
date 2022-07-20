@@ -107,7 +107,7 @@ public class CityFragment extends Fragment {
         });
 
         toolbar = (Toolbar)getActivity().findViewById(R.id.toolbar);
-        toolbar.setTitle("City");
+        //toolbar.setTitle("City");
 
 
 

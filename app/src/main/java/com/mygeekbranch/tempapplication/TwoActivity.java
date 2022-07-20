@@ -34,6 +34,14 @@ public class TwoActivity extends AppCompatActivity {
                     .commit();
 
         }
+        else
+        if ( numberFragment == 4) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, MainFragment.newInstance(null, null))
+                    .commit();
+
+        }
         else {
             getSupportFragmentManager()
                     .beginTransaction()

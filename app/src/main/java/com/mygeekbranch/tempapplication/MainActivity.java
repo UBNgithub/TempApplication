@@ -1,174 +1,74 @@
 package com.mygeekbranch.tempapplication;
 
 import androidx.annotation.NonNull;
-
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity implements Constants {
-    private final static int REQUEST_CODE = 1;
-
-    TextView dateText;
-    TextView mTemperature;
-    TextView mPasmurno;
+public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
-    private  BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()){
-                case R.id.navigation_setting:
-                    Intent intent = new Intent(MainActivity.this, TwoActivity.class);
-                    intent.putExtra("fr",1);
-                    startActivity(intent);
-                    return true;
-                case R.id.navigation_city:
-                    Intent intent1 = new Intent(MainActivity.this, TwoActivity.class);
-                    intent1.putExtra("fr",2);
-                    startActivity(intent1);
-                    return true;
-                case R.id.navigation_about:
-                    Intent intent2 = new Intent(MainActivity.this, TwoActivity.class);
-                    intent2.putExtra("fr",3);
-                    startActivity(intent2);
-                    return true;
-            }
-            return false;
-        }
-    };
-
-
-    List< WeekWeatherModel> weekList;
-
-
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-
-        dateText = findViewById(R.id.textViewDate);
-        Date date = new Date();
-        dateText.setText(date.toString());
-        toolbar =findViewById(R.id.toolbar2);
+        setContentView(R.layout.activity_main2);
+        toolbar = findViewById(R.id.toolbarMain);
         setSupportActionBar(toolbar);
+        //toolbar.setTitle(Singleton.getSingleton().getCurrentCity());
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container_main, MainFragment.newInstance(null, null))
+                    .commit();
+        }
 
 
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView2);
+        bottomNavigationView.setOnItemSelectedListener(itemSelectedListener2);
 
-
-        int temp = Singleton.getSingleton().temperature;
-        mTemperature = findViewById(R.id.temperatureTV);
-        mTemperature.setText(Integer.toString(temp) + " °");
-        mPasmurno = findViewById(R.id.weatherTV);
-        mPasmurno.setText("Пасмурно");
-        BottomNavigationView navigationView = findViewById(R.id.bottomNavigationView);
-        navigationView.setOnNavigationItemSelectedListener(itemSelectedListener);
-
-        initListWeekWeather();
-        initRecyclerView();
 
     }
+
+    private NavigationBarView.OnItemSelectedListener itemSelectedListener2 =
+            new NavigationBarView.OnItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    Fragment selectfragment = null;
+                    switch (item.getItemId()) {
+                        case R.id.navigation_home:
+                            selectfragment = MainFragment.newInstance(null, null);
+                            break;
+                        case R.id.navigation_setting:
+                            selectfragment = SettingFragment.newInstance(null, null);
+                            break;
+                        case R.id.navigation_city:
+                            selectfragment = CityFragment.newInstance(null, null);
+                            break;
+                        case R.id.navigation_about:
+                            selectfragment = AboutFragment.newInstance(null, null);
+                            break;
+                    }
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container_main, selectfragment)
+                            .commit();
+                    return true;
+                }
+            };
+
 
     @Override
     protected void onResume() {
         super.onResume();
-       // actionBar.setTitle(Singleton.getSingleton().getCurrentCity());
-       toolbar.setTitle(Singleton.getSingleton().getCurrentCity());
-
+        // toolbar.setTitle(Singleton.getSingleton().getCurrentCity());
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item1:
-                Intent intent = new Intent(MainActivity.this, TwoActivity.class);
-                intent.putExtra("fr",1);
-                startActivity(intent);
-                Toast.makeText(MainActivity.this, "Clic setting", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.city:
-                Intent intent1 = new Intent(MainActivity.this, TwoActivity.class);
-                intent1.putExtra("fr",2);
-                startActivity(intent1);
-                return true;
-            case R.id.about:
-                Intent intent2 = new Intent(MainActivity.this, TwoActivity.class);
-                intent2.putExtra("fr",3);
-                startActivity(intent2);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode != REQUEST_CODE) {
-            super.onActivityResult(requestCode, resultCode, data);
-            return;
-        }
-        if (resultCode == RESULT_OK) {
-            toolbar.setTitle(data.getStringExtra(RESULT));
-        }
-    }
-
-
-    public void ClickItem5(MenuItem item) {
-        Toast.makeText(MainActivity.this, "Вы выбрали 5- пункт меню", Toast.LENGTH_LONG).show();
-    }
-    private   void initRecyclerView(){
-        RecyclerView recyclerView = findViewById(R.id.week_recyclerView);
-        recyclerView.setHasFixedSize(true);
-        //Декоратор
-        DividerItemDecoration decoration = new DividerItemDecoration(this, LinearLayoutManager.VERTICAL);
-        decoration.setDrawable(getDrawable(R.drawable.item_separator));
-        recyclerView.addItemDecoration(decoration);
-
-
-        LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        WeekAdapter adapter = new WeekAdapter(weekList);
-        recyclerView.setAdapter(adapter);
-    }
-    private  void initListWeekWeather(){
-        weekList = new ArrayList<>();
-        weekList.add(new WeekWeatherModel("ПН", "+9°"));
-        weekList.add(new WeekWeatherModel("ВТ", "+5°"));
-        weekList.add(new WeekWeatherModel("СР", "+4°"));
-        weekList.add(new WeekWeatherModel("ЧТ", "+10°"));
-        weekList.add(new WeekWeatherModel("ПT", "+12°"));
-        weekList.add(new WeekWeatherModel("СБ", "+18°"));
-        weekList.add(new WeekWeatherModel("ВС", "+20°"));
-    }
-
-
-
-
-
 }
