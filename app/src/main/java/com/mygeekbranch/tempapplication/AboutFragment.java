@@ -71,5 +71,15 @@ public class AboutFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         toolbar = (Toolbar) getActivity().findViewById(R.id.toolbarMain);
         toolbar.setTitle("About");
+        toolbar.setNavigationIcon(R.drawable.back);
+       toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               getActivity().getSupportFragmentManager()
+                       .beginTransaction()
+                       .replace(R.id.fragment_container_main, MainFragment.newInstance(null, null))
+                       .commit();
+           }
+       });
     }
 }

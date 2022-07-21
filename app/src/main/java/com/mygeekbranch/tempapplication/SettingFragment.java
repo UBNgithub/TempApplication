@@ -142,8 +142,10 @@ public class SettingFragment extends Fragment {
         });
 
         //((AppCompatActivity) getActivity()).getSupportActionBar(toolbar);
-        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-       // toolbar.setTitle("Setting");
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbarMain);
+       toolbar.setTitle("Setting");
+        toolbar.setNavigationIcon(null);
+
 
 
 

@@ -44,11 +44,11 @@ public class MainActivity3 extends AppCompatActivity implements Constants {
                     intent1.putExtra("fr",2);
                     startActivity(intent1);
                     return true;
-                case R.id.navigation_about:
-                    Intent intent2 = new Intent(MainActivity3.this, TwoActivity.class);
-                    intent2.putExtra("fr",3);
-                    startActivity(intent2);
-                    return true;
+//                case R.id.navigation_about:
+//                    Intent intent2 = new Intent(MainActivity3.this, TwoActivity.class);
+//                    intent2.putExtra("fr",3);
+//                    startActivity(intent2);
+//                    return true;
                 case R.id.navigation_home:
                     Intent intent4 = new Intent(MainActivity3.this, TwoActivity.class);
                     intent4.putExtra("fr",4);
@@ -111,17 +111,17 @@ public class MainActivity3 extends AppCompatActivity implements Constants {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.item1:
-                Intent intent = new Intent(MainActivity3.this, TwoActivity.class);
-                intent.putExtra("fr",1);
-                startActivity(intent);
-                Toast.makeText(MainActivity3.this, "Clic setting", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.city:
-                Intent intent1 = new Intent(MainActivity3.this, TwoActivity.class);
-                intent1.putExtra("fr",2);
-                startActivity(intent1);
-                return true;
+//            case R.id.item1:
+//                Intent intent = new Intent(MainActivity3.this, TwoActivity.class);
+//                intent.putExtra("fr",1);
+//                startActivity(intent);
+//                Toast.makeText(MainActivity3.this, "Clic setting", Toast.LENGTH_SHORT).show();
+//                return true;
+//            case R.id.city:
+//                Intent intent1 = new Intent(MainActivity3.this, TwoActivity.class);
+//                intent1.putExtra("fr",2);
+//                startActivity(intent1);
+//                return true;
             case R.id.about:
                 Intent intent2 = new Intent(MainActivity3.this, MainActivity.class);
                // intent2.putExtra("fr",3);

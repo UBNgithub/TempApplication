@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -21,8 +24,33 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         toolbar = findViewById(R.id.toolbarMain);
-        setSupportActionBar(toolbar);
         //toolbar.setTitle(Singleton.getSingleton().getCurrentCity());
+        //setSupportActionBar(toolbar);
+        toolbar.inflateMenu(R.menu.main);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Fragment selectfragment = null;
+                switch (item.getItemId()) {
+
+//                    case R.id.item1:
+//                        selectfragment = SettingFragment.newInstance(null, null);
+//                        break;
+//                    case R.id.city:
+//                        selectfragment = CityFragment.newInstance(null, null);
+//                        break;
+                    case R.id.about:
+                        selectfragment = AboutFragment.newInstance(null, null);
+                        break;
+                }
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container_main, selectfragment)
+                        .commit();
+                return true;
+            }
+        });
+
 
         if (savedInstanceState == null) {
             getSupportFragmentManager()
@@ -53,9 +81,9 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.navigation_city:
                             selectfragment = CityFragment.newInstance(null, null);
                             break;
-                        case R.id.navigation_about:
-                            selectfragment = AboutFragment.newInstance(null, null);
-                            break;
+//                        case R.id.navigation_about:
+//                            selectfragment = AboutFragment.newInstance(null, null);
+//                            break;
                     }
                     getSupportFragmentManager()
                             .beginTransaction()
@@ -71,4 +99,10 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         // toolbar.setTitle(Singleton.getSingleton().getCurrentCity());
     }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
+//        getMenuInflater().inflate(R.menu.main, menu);
+//        return true;
+//    }
 }

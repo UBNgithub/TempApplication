@@ -96,18 +96,20 @@ public class CityFragment extends Fragment {
                         new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Toast.makeText(getContext(), "set city", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Город выбран", Toast.LENGTH_SHORT).show();
                                 cityList.add(mEditText.getText().toString());
                                 Singleton.getSingleton().setCurrentCity(mEditText.getText().toString());
-                                getActivity().finish();
+                                //getActivity().finish();
                             }
                         }).show();
 
             }
         });
 
-        toolbar = (Toolbar)getActivity().findViewById(R.id.toolbar);
-        //toolbar.setTitle("City");
+        toolbar = (Toolbar)getActivity().findViewById(R.id.toolbarMain);
+        toolbar.setTitle("City");
+        toolbar.setNavigationIcon(null);
+
 
 
 

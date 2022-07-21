@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -11,6 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -33,7 +37,6 @@ public class MainFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
     public MainFragment() {
     }
 
@@ -55,12 +58,15 @@ public class MainFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_main_, container, false);
     }
 
@@ -79,14 +85,19 @@ public class MainFragment extends Fragment {
         mPasmurno = view.findViewById(R.id.weatherTVMain);
         mPasmurno.setText("Пасмурно");
 
-//        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-//        toolbar.setTitle(Singleton.getSingleton().getCurrentCity());
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbarMain);
+        toolbar.setTitle(Singleton.getSingleton().getCurrentCity());
+        //toolbar.inflateMenu(R.menu.main);
+        toolbar.setNavigationIcon(null);
+
+
+
+
+
+       // toolbar.setTitle("CurrentCity");
 
         initListWeekWeather();
         initRecyclerView(view);
-
-
-
     }
     private   void initRecyclerView(View view){
         RecyclerView recyclerView = view.findViewById(R.id.week_recyclerView2);
