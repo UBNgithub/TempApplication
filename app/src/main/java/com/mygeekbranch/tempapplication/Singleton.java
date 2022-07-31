@@ -1,11 +1,13 @@
 package com.mygeekbranch.tempapplication;
 
+import com.mygeekbranch.tempapplication.modelWeather.WeatherInit;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Singleton {
     private static Singleton sSingleton;
-    int temperature;
+    String temperature;
     private boolean isCheckHumidity;
     private boolean isCheckNightMode;
     private List<String> cityList;
@@ -13,7 +15,8 @@ public class Singleton {
 
 
     public Singleton() {
-        temperature = 0;
+
+        temperature = "0";
         isCheckHumidity = false;
         isCheckNightMode = false;
         cityList = new ArrayList<>();
@@ -42,8 +45,12 @@ public class Singleton {
 
 
 
-    public int getTemperature() {
+    public String getTemperature() {
         return temperature;
+    }
+
+    public void setTemperature(String temperature) {
+        this.temperature = temperature;
     }
 
     public boolean isCheckHumidity() {
@@ -62,14 +69,14 @@ public class Singleton {
         isCheckNightMode = checkNightMode;
     }
 
-    public void increaseTemperature() {
-        temperature++;
-
-    }
-
-    public void decreaseTemperature() {
-        temperature--;
-    }
+//    public void increaseTemperature() {
+//        temperature++;
+//
+//    }
+//
+//    public void decreaseTemperature() {
+//        temperature--;
+//    }
 
 
 }

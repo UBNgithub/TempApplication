@@ -27,7 +27,7 @@ public class SettingFragment extends Fragment {
     TextView mTextViewHim;
     boolean isCheckHum;
     boolean isCheckNightMode;
-    int mTemperature;
+   String mTemperature;
     Button mSetTemperature;
     Button mIncTemperature;
     Button mDecTemperature;
@@ -117,7 +117,7 @@ public class SettingFragment extends Fragment {
 
             }
         });
-        mTemperature = Singleton.getSingleton().temperature;
+        mTemperature = Singleton.getSingleton().getTemperature();
         mChangeTempText = view.findViewById(R.id.changeTemp);
         mChangeTempText.setText("Температура : " + mTemperature + " °");
 
@@ -127,16 +127,17 @@ public class SettingFragment extends Fragment {
         mIncTemperature.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Singleton.getSingleton().increaseTemperature();
-                mTemperature = Singleton.getSingleton().temperature;
+               // Singleton.getSingleton().increaseTemperature();
+              //  mTemperature = Singleton.getSingleton().getTemperature();
                 mChangeTempText.setText("Температура : " + mTemperature + " °");
             }
         });
         mDecTemperature.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Singleton.getSingleton().decreaseTemperature();
-                mTemperature = Singleton.getSingleton().getTemperature();
+
+                //Singleton.getSingleton().decreaseTemperature();
+               // mTemperature = Singleton.getSingleton().getTemperature();
                 mChangeTempText.setText("Температура : " + mTemperature + " °");
             }
         });

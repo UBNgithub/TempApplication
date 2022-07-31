@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +19,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.mygeekbranch.tempapplication.modelWeather.WeatherInit;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,6 +51,7 @@ public class MainFragment extends Fragment {
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -57,6 +62,12 @@ public class MainFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        //WeatherInit.Init(getActivity());
+        Toast.makeText(getActivity(), Singleton.getSingleton().getTemperature(), Toast.LENGTH_LONG).show();
+        Log.d("TEMPERATURE MaimFragment =", Singleton.getSingleton().getTemperature());
+
+
+
 
 
 
@@ -74,13 +85,15 @@ public class MainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
         dateText = view.findViewById(R.id.textViewDateMain);
         Date date = new Date();
         dateText.setText(date.toString());
 
-        int temp = Singleton.getSingleton().temperature;
+        String temp = Singleton.getSingleton().temperature;
         mTemperature = view.findViewById(R.id.temperatureTVMain);
-        mTemperature.setText(Integer.toString(temp) + " °");
+
+        mTemperature.setText(temp + " °");
 
         mPasmurno = view.findViewById(R.id.weatherTVMain);
         mPasmurno.setText("Пасмурно");

@@ -81,9 +81,9 @@ public class MainActivity3 extends AppCompatActivity implements Constants {
 
 
 
-        int temp = Singleton.getSingleton().temperature;
+        String temp = Singleton.getSingleton().temperature;
         mTemperature = findViewById(R.id.temperatureTV2);
-        mTemperature.setText(Integer.toString(temp) + " °");
+        mTemperature.setText(temp + " °");
         mPasmurno = findViewById(R.id.weatherTV2);
         mPasmurno.setText("Пасмурно");
         BottomNavigationView navigationView = findViewById(R.id.bottomNavigationView);
