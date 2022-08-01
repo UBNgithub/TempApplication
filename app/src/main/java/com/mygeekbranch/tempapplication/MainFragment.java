@@ -1,27 +1,20 @@
 package com.mygeekbranch.tempapplication;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mygeekbranch.tempapplication.modelWeather.WeatherInit;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,7 +26,7 @@ public class MainFragment extends Fragment {
     TextView mTemperature;
     TextView mPasmurno;
     Toolbar toolbar;
-    List< WeekWeatherModel> weekList;
+    List<WeekWeatherModel> weekList;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -41,6 +34,7 @@ public class MainFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
     public MainFragment() {
     }
 
@@ -63,12 +57,8 @@ public class MainFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         //WeatherInit.Init(getActivity());
-        Toast.makeText(getActivity(), Singleton.getSingleton().getTemperature(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(getActivity(), Singleton.getSingleton().getTemperature(), Toast.LENGTH_LONG).show();
         Log.d("TEMPERATURE MaimFragment =", Singleton.getSingleton().getTemperature());
-
-
-
-
 
 
     }
@@ -104,15 +94,13 @@ public class MainFragment extends Fragment {
         toolbar.setNavigationIcon(null);
 
 
-
-
-
-       // toolbar.setTitle("CurrentCity");
+        // toolbar.setTitle("CurrentCity");
 
         initListWeekWeather();
         initRecyclerView(view);
     }
-    private   void initRecyclerView(View view){
+
+    private void initRecyclerView(View view) {
         RecyclerView recyclerView = view.findViewById(R.id.week_recyclerView2);
         recyclerView.setHasFixedSize(true);
 
@@ -122,16 +110,15 @@ public class MainFragment extends Fragment {
         recyclerView.addItemDecoration(decoration);
 
 
-
-        LinearLayoutManager linearLayoutManager =new LinearLayoutManager(getActivity());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
         WeekAdapter adapter = new WeekAdapter(weekList);
         recyclerView.setAdapter(adapter);
 
 
-
     }
-    private  void initListWeekWeather(){
+
+    private void initListWeekWeather() {
         weekList = new ArrayList<>();
         weekList.add(new WeekWeatherModel("ПН", "+9°"));
         weekList.add(new WeekWeatherModel("ВТ", "+5°"));

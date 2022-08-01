@@ -1,39 +1,32 @@
 package com.mygeekbranch.tempapplication;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
-
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.mygeekbranch.tempapplication.modelWeather.WeatherInit;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
- 
 
-
+    private static MainActivity instance;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        instance = this;
 
 
-
-        WeatherInit.Init(MainActivity.context);
+        WeatherInit.Init(); // Запрос погоды с сервера
 
 
         toolbar = findViewById(R.id.toolbarMain);
@@ -114,14 +107,26 @@ public class MainActivity extends AppCompatActivity {
         // toolbar.setTitle(Singleton.getSingleton().getCurrentCity());
     }
 
-//    @Override
+    //    @Override
 //    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
 //        getMenuInflater().inflate(R.menu.main, menu);
 //        return true;
 //    }
+    public static MainActivity getInstance() {
+        return instance;
+    }
 
+    public void initMaimFragment() {
+        //Toast.makeText(MainActivity.this, "Mainactyivity Toast Request weathher finish", Toast.LENGTH_SHORT).show();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container_main, MainFragment.newInstance(null, null))
+                .commit();
 
-
+    }
+    public  void showError(){
+        Toast.makeText(MainActivity.this,"Ошибка соединения", Toast.LENGTH_LONG).show();
+    }
 
 
 }

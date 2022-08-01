@@ -1,17 +1,11 @@
 package com.mygeekbranch.tempapplication.modelWeather;
 
-import android.content.Context;
+import android.app.Activity;
 import android.os.Handler;
 import android.util.Log;
-import android.widget.Toast;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import com.google.gson.Gson;
 import com.mygeekbranch.tempapplication.MainActivity;
-import com.mygeekbranch.tempapplication.MainFragment;
-import com.mygeekbranch.tempapplication.R;
 import com.mygeekbranch.tempapplication.Singleton;
 
 import java.io.BufferedReader;
@@ -25,17 +19,21 @@ import javax.net.ssl.HttpsURLConnection;
 
 
 public class WeatherInit {
+    private static Activity activity;
 
-
+    public WeatherInit(Activity activity) {
+        this.activity = activity;
+    }
 
     private final static String TAG = "Weather";
     private final static String WEATHER_URL =
             // "https://api.openweathermap.org/data/2.5/weather?lat=55.75&lon=37.62&appid=";
-            "https://api.openweathermap.org/data/2.5/weather?lat=55.75&lon=37.62&units=metric&appid=";
+    //"https://api.openweathermap.org/data/2.5/weather?lat=55.75&lon=37.62&units=metric&appid=";
+    "https://api.openweathermap.org/data/2.5/weather?q=Cheboksary,RU&units=metric&appid=";
     private static final String WEATHER_API_KEY = "f61adcb6ab99fd0e42d9728a4eea3df7";
 
 
-    public static void Init(Context context) {
+    public static void Init() {
         Log.d("WeatherInit", "Init");
 
         try {
@@ -69,9 +67,19 @@ public class WeatherInit {
                     } catch (IOException e) {
                         Log.e(TAG, "FAIL CONECTION", e);
                         e.printStackTrace();
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                               MainActivity.getInstance().showError();
+                            }
+                        });
+
+
+
                     } finally {
                         if (urlConnection != null)
                             urlConnection.disconnect();
+
                     }
 
 
@@ -91,9 +99,15 @@ public class WeatherInit {
 
     public static void initWeather(WeatherRequest w) {
         String temp = String.format("%.2f", w.getMain().getTemp());
+        MainActivity.getInstance().initMaimFragment();
+
+
+
+
 
 
         Singleton.getSingleton().setTemperature(temp);
+
         Log.d("TEMPERATURE =", temp);
 
 
