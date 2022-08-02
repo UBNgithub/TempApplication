@@ -5,6 +5,9 @@
     <string name="nizhniy_novgorod">Nizhniy Novgorod</string>
     <string name="moscow">Moscow</string>
     <string name="about_city">About city</string>
+    <string name="WeatherApp">Погодное приложение</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>

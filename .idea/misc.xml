@@ -3,11 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/79083/Desktop/new/ANDROID/Practice/AndroidPro_3/TempApplication/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1905" />
         <entry key="..\:/Users/79083/Desktop/new/ANDROID/Practice/AndroidPro_3/TempApplication/app/src/main/res/drawable/ic_launcher_background.xml" value="0.164" />
         <entry key="..\:/Users/79083/Desktop/new/ANDROID/Practice/AndroidPro_3/TempApplication/app/src/main/res/drawable/item_separator.xml" value="0.1695" />
-        <entry key="..\:/Users/79083/Desktop/new/ANDROID/Practice/AndroidPro_3/TempApplication/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/79083/Desktop/new/ANDROID/Practice/AndroidPro_3/TempApplication/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/79083/Desktop/new/ANDROID/Practice/AndroidPro_3/TempApplication/app/src/main/res/layout/activity_main2.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/79083/Desktop/new/ANDROID/Practice/AndroidPro_3/TempApplication/app/src/main/res/layout/activity_main5.xml" value="0.2604166666666667" />
+        <entry key="..\:/Users/79083/Desktop/new/ANDROID/Practice/AndroidPro_3/TempApplication/app/src/main/res/layout/activity_main_4.xml" value="0.2734375" />
         <entry key="..\:/Users/79083/Desktop/new/ANDROID/Practice/AndroidPro_3/TempApplication/app/src/main/res/layout/activity_two.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/79083/Desktop/new/ANDROID/Practice/AndroidPro_3/TempApplication/app/src/main/res/layout/app_bar_main.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/79083/Desktop/new/ANDROID/Practice/AndroidPro_3/TempApplication/app/src/main/res/layout/fragment_about.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/79083/Desktop/new/ANDROID/Practice/AndroidPro_3/TempApplication/app/src/main/res/layout/fragment_city.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/79083/Desktop/new/ANDROID/Practice/AndroidPro_3/TempApplication/app/src/main/res/layout/fragment_city_2.xml" value="0.27447916666666666" />
@@ -16,6 +20,9 @@
         <entry key="..\:/Users/79083/Desktop/new/ANDROID/Practice/AndroidPro_3/TempApplication/app/src/main/res/layout/item_city.xml" value="0.2734375" />
         <entry key="..\:/Users/79083/Desktop/new/ANDROID/Practice/AndroidPro_3/TempApplication/app/src/main/res/layout/item_week_weather.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/79083/Desktop/new/ANDROID/Practice/AndroidPro_3/TempApplication/app/src/main/res/layout/itetem_week_weathe.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/79083/Desktop/new/ANDROID/Practice/AndroidPro_3/TempApplication/app/src/main/res/layout/nav_header_main.xml" value="0.2734375" />
+        <entry key="..\:/Users/79083/Desktop/new/ANDROID/Practice/AndroidPro_3/TempApplication/app/src/main/res/menu/activity_main_drawer.xml" value="0.1" />
+        <entry key="..\:/Users/79083/Desktop/new/ANDROID/Practice/AndroidPro_3/TempApplication/app/src/main/res/menu/activity_main_drower.xml" value="0.4" />
         <entry key="..\:/Users/79083/Desktop/new/ANDROID/Practice/AndroidPro_3/TempApplication/app/src/main/res/menu/bottom_nav_menu.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/79083/Desktop/new/ANDROID/Practice/AndroidPro_3/TempApplication/app/src/main/res/menu/main.xml" value="0.264" />
         <entry key="..\:/Users/Alexandr/ANDROID/Practice/AndroidPro_3/TempApplication/app/src/main/res/layout/activity_city.xml" value="0.2713541666666667" />

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navigation_home"
+            android:icon="@drawable/home"
+            android:title="home"
+            app:showAsAction="always" />
+        <item
+            android:id="@+id/navigation_setting"
+            android:icon="@drawable/setting"
+            android:title="setting"
+            app:showAsAction="always" />
+        <item
+            android:id="@+id/navigation_city"
+            android:icon="@drawable/city"
+            android:title="City"
+            app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/navigation_about"
+                android:icon="@drawable/about"
+                android:title="About"
+                app:showAsAction="ifRoom" />
+
+
+    </group>
+
+
+</menu>
