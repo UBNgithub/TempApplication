@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -88,16 +89,19 @@ public class MainFragment extends Fragment {
         mPasmurno = view.findViewById(R.id.weatherTVMain);
         mPasmurno.setText("Пасмурно");
 
-        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbarMain);
-        toolbar.setTitle(Singleton.getSingleton().getCurrentCity());
-        //toolbar.inflateMenu(R.menu.main);
-        toolbar.setNavigationIcon(null);
+       // toolbar = (Toolbar) getActivity().findViewById(R.id.toolbarMain);
+        //toolbar.setTitle(Singleton.getSingleton().getCurrentCity());
+       // toolbar.inflateMenu(R.menu.main);
+       // toolbar.setNavigationIcon(null);
+
+
 
 
         // toolbar.setTitle("CurrentCity");
 
         initListWeekWeather();
         initRecyclerView(view);
+        apdateAppBar();
     }
 
     private void initRecyclerView(View view) {
@@ -127,6 +131,11 @@ public class MainFragment extends Fragment {
         weekList.add(new WeekWeatherModel("ПT", "+12°"));
         weekList.add(new WeekWeatherModel("СБ", "+18°"));
         weekList.add(new WeekWeatherModel("ВС", "+20°"));
+    }
+    private  void apdateAppBar (){
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        String currentCity= Singleton.getSingleton().getCurrentCity();
+        activity.getSupportActionBar().setTitle(currentCity);
     }
 
 }

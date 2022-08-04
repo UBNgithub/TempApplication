@@ -101,6 +101,7 @@ public class SettingFragment extends Fragment {
 
             }
         });
+        apdateAppBar();
         mTextViewHim = view.findViewById(R.id.textViewHim);
         setTextViewHim();
         mCheckBoxHim = view.findViewById(R.id.checkBoxHimidity);
@@ -143,9 +144,9 @@ public class SettingFragment extends Fragment {
         });
 
         //((AppCompatActivity) getActivity()).getSupportActionBar(toolbar);
-        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbarMain);
-       toolbar.setTitle("Setting");
-        toolbar.setNavigationIcon(null);
+       // toolbar = (Toolbar) getActivity().findViewById(R.id.toolbarMain);
+       //toolbar.setTitle("Setting");
+       // toolbar.setNavigationIcon(null);
 
 
 
@@ -155,6 +156,11 @@ public class SettingFragment extends Fragment {
 
     public void setTextViewHim() {
         mTextViewHim.setText("Влажность: "+ Boolean.toString(Singleton.getSingleton().isCheckHumidity()));
+    }
+    private  void apdateAppBar (){
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        String currentCity= "Setting";
+        activity.getSupportActionBar().setTitle(currentCity);
     }
 
 

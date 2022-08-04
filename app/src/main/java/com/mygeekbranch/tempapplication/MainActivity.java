@@ -35,8 +35,12 @@ public class MainActivity extends AppCompatActivity  implements  NavigationView.
 
         toolbar = findViewById(R.id.toolbarMain);
         //toolbar.setTitle(Singleton.getSingleton().getCurrentCity());
-        //setSupportActionBar(toolbar);
-        toolbar.inflateMenu(R.menu.main);
+        setSupportActionBar(toolbar);
+        //toolbar.inflateMenu(R.menu.main);
+        initDrawer(toolbar);
+
+
+
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -60,7 +64,7 @@ public class MainActivity extends AppCompatActivity  implements  NavigationView.
                 return true;
             }
         });
-        initDrawer(toolbar);
+
 
 
 
@@ -78,10 +82,11 @@ public class MainActivity extends AppCompatActivity  implements  NavigationView.
 
     }
 
+
     private void initDrawer(Toolbar toolbar) {
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout,toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);

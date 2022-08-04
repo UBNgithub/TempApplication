@@ -84,6 +84,7 @@ public class CityFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         // ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("City");
         mEditText = view.findViewById(R.id.text_input_edittext);
+        apdateAppBar();
 
         setCity = view.findViewById(R.id.set_city);
         setCity.setOnClickListener(new View.OnClickListener() {
@@ -106,9 +107,9 @@ public class CityFragment extends Fragment {
             }
         });
 
-        toolbar = (Toolbar)getActivity().findViewById(R.id.toolbarMain);
-        toolbar.setTitle("City");
-        toolbar.setNavigationIcon(null);
+        //toolbar = (Toolbar)getActivity().findViewById(R.id.toolbarMain);
+        //toolbar.setTitle("City");
+
 
 
 
@@ -125,6 +126,11 @@ public class CityFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         CityAdapter adapter = new CityAdapter(cityList);
         recyclerView.setAdapter(adapter);
+    }
+    private  void apdateAppBar (){
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        String currentCity= "City";
+        activity.getSupportActionBar().setTitle(currentCity);
     }
 
 
