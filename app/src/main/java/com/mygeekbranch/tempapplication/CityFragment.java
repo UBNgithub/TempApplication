@@ -90,8 +90,8 @@ public class CityFragment extends Fragment {
         setCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cityList.add(mEditText.getText().toString());
-                Singleton.getSingleton().setCurrentCity(mEditText.getText().toString());
+                // cityList.add(mEditText.getText().toString());
+                // Singleton.getSingleton().setCurrentCity(mEditText.getText().toString());
 
                 Snackbar.make(view, "Подтвердите выбор", Snackbar.LENGTH_LONG).setAction("Ok",
                         new View.OnClickListener() {
@@ -104,15 +104,9 @@ public class CityFragment extends Fragment {
                             }
                         }).show();
 
+
             }
         });
-
-        //toolbar = (Toolbar)getActivity().findViewById(R.id.toolbarMain);
-        //toolbar.setTitle("City");
-
-
-
-
 
         initRecyclerViewCity(view);
 
@@ -127,13 +121,12 @@ public class CityFragment extends Fragment {
         CityAdapter adapter = new CityAdapter(cityList);
         recyclerView.setAdapter(adapter);
     }
-    private  void apdateAppBar (){
+
+    private void apdateAppBar() {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
-        String currentCity= "City";
-        activity.getSupportActionBar().setTitle(currentCity);
+        String city = "City";
+        activity.getSupportActionBar().setTitle(city);
     }
-
-
 
 
 }

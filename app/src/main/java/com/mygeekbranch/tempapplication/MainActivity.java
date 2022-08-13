@@ -1,11 +1,13 @@
 package com.mygeekbranch.tempapplication;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -17,7 +19,7 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.mygeekbranch.tempapplication.modelWeather.WeatherInit;
 
-public class MainActivity extends AppCompatActivity  implements  NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
 
     private static MainActivity instance;
@@ -38,7 +40,6 @@ public class MainActivity extends AppCompatActivity  implements  NavigationView.
         setSupportActionBar(toolbar);
         //toolbar.inflateMenu(R.menu.main);
         initDrawer(toolbar);
-
 
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -66,8 +67,6 @@ public class MainActivity extends AppCompatActivity  implements  NavigationView.
         });
 
 
-
-
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
@@ -83,14 +82,13 @@ public class MainActivity extends AppCompatActivity  implements  NavigationView.
     }
 
 
-    private void initDrawer(Toolbar toolbar) {
+    private void initDrawer(Toolbar toolbar) {// метод драйвера
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout,toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
 
 
     }
@@ -147,8 +145,24 @@ public class MainActivity extends AppCompatActivity  implements  NavigationView.
                 .commit();
 
     }
-    public  void showError(){
-        Toast.makeText(MainActivity.this,"Ошибка соединения", Toast.LENGTH_LONG).show();
+
+    public void showError() {
+        //Toast.makeText(MainActivity.this, "Ошибка соединения", Toast.LENGTH_LONG).show();
+        new AlertDialog.Builder(MainActivity.this)
+                .setTitle("Ошибка соединения с сервером")
+                .setIcon(R.mipmap.ic_launcher)
+                .setCancelable(false)
+                .setPositiveButton("Ok",
+                new  DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .create()
+                .show();
+
+
     }
 
 
@@ -156,16 +170,16 @@ public class MainActivity extends AppCompatActivity  implements  NavigationView.
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         Fragment selectfragment = null;
-        if (id == R.id.navigation_home){
+        if (id == R.id.navigation_home) {
             selectfragment = MainFragment.newInstance(null, null);
 
-        }else  if (id == R.id.navigation_city){
+        } else if (id == R.id.navigation_city) {
             selectfragment = CityFragment.newInstance(null, null);
 
-        }else  if (id == R.id.navigation_setting){
+        } else if (id == R.id.navigation_setting) {
             selectfragment = SettingFragment.newInstance(null, null);
 
-        }else  if (id == R.id.navigation_about){
+        } else if (id == R.id.navigation_about) {
             selectfragment = AboutFragment.newInstance(null, null);
 
         }
@@ -173,13 +187,8 @@ public class MainActivity extends AppCompatActivity  implements  NavigationView.
                 .beginTransaction()
                 .replace(R.id.fragment_container_main, selectfragment)
                 .commit();
-        DrawerLayout drawerLayout =findViewById(R.id.drawer_layout);
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START);
-
-
-
-
-
 
 
         return true;

@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mygeekbranch.tempapplication.modelWeather.WeatherInit;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -60,6 +62,7 @@ public class MainFragment extends Fragment {
         //WeatherInit.Init(getActivity());
         //Toast.makeText(getActivity(), Singleton.getSingleton().getTemperature(), Toast.LENGTH_LONG).show();
         Log.d("TEMPERATURE MaimFragment =", Singleton.getSingleton().getTemperature());
+
 
 
     }
