@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
+import com.mygeekbranch.tempapplication.modelWeather.CityBottomSheetDialogFragment;
 import com.mygeekbranch.tempapplication.modelWeather.WeatherInit;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -30,8 +31,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         instance = this;
-
-
         WeatherInit.Init(); // Запрос погоды с сервера
 
 
@@ -93,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    // lisener для нижней навигационной панели
     private NavigationBarView.OnItemSelectedListener itemSelectedListener2 =
             new NavigationBarView.OnItemSelectedListener() {
                 @Override
@@ -101,22 +101,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     switch (item.getItemId()) {
                         case R.id.navigation_home:
                             selectfragment = MainFragment.newInstance(null, null);
+
+                            getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.fragment_container_main, selectfragment)
+                                    .commit();
                             break;
                         case R.id.navigation_setting:
                             selectfragment = SettingFragment.newInstance(null, null);
+                            getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.fragment_container_main, selectfragment)
+                                    .commit();
                             break;
                         case R.id.navigation_city:
-                            selectfragment = CityFragment.newInstance(null, null);
+
+//                            CityDialogFragment cityDialogFragment = new CityDialogFragment();
+//                            cityDialogFragment.show(getSupportFragmentManager(), "cityDialogFragment");
+                            CityBottomSheetDialogFragment dialogFragment = CityBottomSheetDialogFragment.newInstance();
+                            dialogFragment.show(getSupportFragmentManager(),"CityBottomSheetDialogFragment");
+
+
                             break;
-//                        case R.id.navigation_about:
-//                            selectfragment = AboutFragment.newInstance(null, null);
-//                            break;
+                        case R.id.navigation_about:
+                            selectfragment = AboutFragment.newInstance(null, null);
+                            break;
                     }
 
-                    getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragment_container_main, selectfragment)
-                            .commit();
+//                    getSupportFragmentManager()
+//                            .beginTransaction()
+//                            .replace(R.id.fragment_container_main, selectfragment)
+//                            .commit();
                     return true;
                 }
             };
@@ -150,15 +165,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Toast.makeText(MainActivity.this, "Ошибка соединения", Toast.LENGTH_LONG).show();
         new AlertDialog.Builder(MainActivity.this)
                 .setTitle("Ошибка соединения с сервером")
-                .setIcon(R.mipmap.ic_launcher)
+                .setIcon(R.drawable.icon)
                 .setCancelable(false)
-                .setPositiveButton("Ok",
-                new  DialogInterface.OnClickListener(){
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                .setNegativeButton("Закрыть окно",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(MainActivity.this, "Диалог закрыт", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                .setPositiveButton("Обновить",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                WeatherInit.Init();
 
-                    }
-                })
+                            }
+                        })
                 .create()
                 .show();
 
