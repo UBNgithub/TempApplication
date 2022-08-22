@@ -56,7 +56,7 @@ public  class CityBottomSheetDialogFragment extends BottomSheetDialogFragment {
             public void onClick(View v) {
 
                 dismiss();
-                Toast.makeText(MainActivity.getInstance(),"Clic cancel", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.getInstance(),"CLIC cancel", Toast.LENGTH_LONG).show();
 
             }
         });
