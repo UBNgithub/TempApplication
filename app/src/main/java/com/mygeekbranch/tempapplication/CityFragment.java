@@ -34,7 +34,6 @@ public class CityFragment extends Fragment {
 
     Button setCity;
     Toolbar toolbar;
-
     public TextInputEditText mEditText;
     public List<String> cityList = Singleton.getSingleton().getCityList();
 

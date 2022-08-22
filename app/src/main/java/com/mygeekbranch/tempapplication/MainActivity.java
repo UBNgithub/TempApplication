@@ -17,7 +17,6 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
-import com.mygeekbranch.tempapplication.modelWeather.CityBottomSheetDialogFragment;
 import com.mygeekbranch.tempapplication.modelWeather.WeatherInit;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -216,4 +215,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         return true;
     }
+
+    private  OnDialogListener dialogListener = new OnDialogListener() {
+        @Override
+        public void onDialogset() {
+            Toast.makeText(MainActivity.this, "Нажата SET", Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void onDialogCencel() {
+            Toast.makeText(MainActivity.this, "Нажата CANCEL", Toast.LENGTH_LONG).show();
+        }
+    };
 }

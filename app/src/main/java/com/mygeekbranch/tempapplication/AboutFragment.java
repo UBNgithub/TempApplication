@@ -12,6 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.textfield.TextInputEditText;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link AboutFragment#newInstance} factory method to
@@ -88,5 +91,28 @@ public class AboutFragment extends Fragment {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         String currentCity= "About";
         activity.getSupportActionBar().setTitle(currentCity);
+    }
+
+    public static class CityBottomSheetDialogFragment extends BottomSheetDialogFragment {
+        TextInputEditText textInputEditText ;
+
+        public static CityBottomSheetDialogFragment newInstance(){
+            return new CityBottomSheetDialogFragment();
+        }
+
+        @Nullable
+        @Override
+        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            View view = inflater.inflate(R.layout.bottom_sheet_dialog_city,container,false);
+            return view;
+        }
+
+        @Override
+        public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
+            textInputEditText = view.findViewById(R.id.city_edit_text);
+
+
+        }
     }
 }
