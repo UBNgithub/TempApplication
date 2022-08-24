@@ -29,6 +29,7 @@ public class MainFragment extends Fragment {
     TextView mTemperature;
     TextView mPasmurno;
     Toolbar toolbar;
+    TemperatureView temperatureView;
     List<WeekWeatherModel> weekList;
 
     private static final String ARG_PARAM1 = "param1";
@@ -84,13 +85,17 @@ public class MainFragment extends Fragment {
         Date date = new Date();
         dateText.setText(date.toString());
 
-        String temp = Singleton.getSingleton().temperature;
+        //String temp = Singleton.getSingleton().temperature;
+        float temp = Singleton.getSingleton().getTemperatureFloat();
         mTemperature = view.findViewById(R.id.temperatureTVMain);
 
         mTemperature.setText(temp + " °");
 
         mPasmurno = view.findViewById(R.id.weatherTVMain);
         mPasmurno.setText("Пасмурно");
+
+        temperatureView = view.findViewById(R.id.button);
+        temperatureView.setTemperatureLevel(temp);
 
        // toolbar = (Toolbar) getActivity().findViewById(R.id.toolbarMain);
         //toolbar.setTitle(Singleton.getSingleton().getCurrentCity());

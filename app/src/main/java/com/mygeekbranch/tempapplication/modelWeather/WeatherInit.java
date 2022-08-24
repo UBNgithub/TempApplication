@@ -99,9 +99,12 @@ public class WeatherInit {
 
     public static void initWeather(WeatherRequest w) {
         String temp = String.format("%.2f", w.getMain().getTemp());
-        //MainActivity.getInstance().initMaimFragment();
+        Float tempF = w.getMain().getTemp();
+
+
         Singleton.getSingleton().setTemperature(temp);
-        Log.d("TEMPERATURE =", temp);
+        Singleton.getSingleton().setTemperatureFloat(tempF);
+        Log.d("TEMPERATURE =", tempF.toString());
 
 
     }

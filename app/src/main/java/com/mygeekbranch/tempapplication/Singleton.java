@@ -8,6 +8,7 @@ import java.util.List;
 public class Singleton {
     private static Singleton sSingleton;
     String temperature;
+    private  float temperatureFloat;
     private boolean isCheckHumidity;
     private boolean isCheckNightMode;
     private List<String> cityList;
@@ -17,6 +18,7 @@ public class Singleton {
     public Singleton() {
 
         temperature = "0";
+        temperatureFloat = 1.0f;
         isCheckHumidity = false;
         isCheckNightMode = false;
         cityList = new ArrayList<>();
@@ -29,6 +31,14 @@ public class Singleton {
         if (sSingleton == null)
             sSingleton = new Singleton();
         return sSingleton;
+    }
+
+    public float getTemperatureFloat() {
+        return temperatureFloat;
+    }
+
+    public void setTemperatureFloat(float temperatureFloat) {
+        this.temperatureFloat = temperatureFloat;
     }
 
     public String getCurrentCity() {
