@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
+import com.mygeekbranch.tempapplication.modelWeather.GetUrlData;
+import com.mygeekbranch.tempapplication.modelWeather.GetWeatherData;
 import com.mygeekbranch.tempapplication.modelWeather.WeatherInit;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -30,7 +32,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         instance = this;
-        WeatherInit.Init(); // Запрос погоды с сервера
+        //WeatherInit.Init(); // Запрос погоды с сервера
+
+        GetUrlData.Init();
 
 
         toolbar = findViewById(R.id.toolbarMain);
