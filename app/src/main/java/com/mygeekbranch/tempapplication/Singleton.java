@@ -23,7 +23,7 @@ public class Singleton {
         isCheckNightMode = false;
         cityList = new ArrayList<>();
         cityList.add("Cheboksary");
-        currentCity = "Kanash";
+        currentCity = "Cheboksary";
 
     }
 
