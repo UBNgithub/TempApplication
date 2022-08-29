@@ -13,12 +13,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.mygeekbranch.tempapplication.modelWeather.GetUrlData;
 import com.mygeekbranch.tempapplication.modelWeather.GetWeatherData;
+import com.mygeekbranch.tempapplication.modelWeather.GetWeatherWorker;
 import com.mygeekbranch.tempapplication.modelWeather.WeatherInit;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,9 +35,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         instance = this;
-        //WeatherInit.Init(); // Запрос погоды с сервера
 
-        GetUrlData.Init();
+        // Запрос погоды с сервера
+        //WeatherInit.Init();
+
+        // Запрос погоды с сервера из отдельного класса
+        //GetUrlData.Init();
+
+        // Запрос с сервера через Workmanager
+        WeatherInit();
+
 
 
         toolbar = findViewById(R.id.toolbarMain);
@@ -231,4 +241,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(MainActivity.this, "Нажата CANCEL", Toast.LENGTH_LONG).show();
         }
     };
+    private  void WeatherInit(){
+        OneTimeWorkRequest workRequest = new OneTimeWorkRequest
+                .Builder(GetWeatherWorker.class)
+                // .setInitialDelay(5,TimeUnit.SECONDS)
+                .build();
+        WorkManager workManager = WorkManager.getInstance(MainActivity.this);
+        workManager.enqueue(workRequest);
+    }
 }

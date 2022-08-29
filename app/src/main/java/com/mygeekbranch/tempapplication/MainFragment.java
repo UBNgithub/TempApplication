@@ -18,12 +18,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.impl.WorkManagerImpl;
 
+
+import com.mygeekbranch.tempapplication.modelWeather.GetWeatherWorker;
 import com.mygeekbranch.tempapplication.modelWeather.WeatherInit;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public class MainFragment extends Fragment {
@@ -98,8 +104,6 @@ public class MainFragment extends Fragment {
         mTemperature.setText(temp + " °");
         mPasmurno.setText("Пасмурно");
 
-
-
         temperatureView.setTemperatureLevel(temp);
 
 
@@ -108,13 +112,13 @@ public class MainFragment extends Fragment {
         setTempCastView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"Set temp clikc", Toast.LENGTH_SHORT).show();
-               // Singleton.getSingleton().setTemperatureFloat(20.0f);
-
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container_main, MainFragment.newInstance(null, null))
-                        .commit();
+                Toast.makeText(getActivity(),"Set temp click", Toast.LENGTH_SHORT).show();
+                OneTimeWorkRequest workRequest = new OneTimeWorkRequest
+                        .Builder(GetWeatherWorker.class)
+                       // .setInitialDelay(5,TimeUnit.SECONDS)
+                        .build();
+                WorkManager workManager = WorkManager.getInstance(getActivity());
+                workManager.enqueue(workRequest);
 
             }
         });
@@ -140,24 +144,6 @@ public class MainFragment extends Fragment {
         handler.postDelayed(runnable, 1000);
        // handler.post(runnable);
 
-
-
-
-
-
-
-
-
-
-//         temp = Singleton.getSingleton().getTemperatureFloat();
-//        mTemperature = view.findViewById(R.id.temperatureTVMain);
-//        mTemperature.setText(temp + " °");
-//
-//        mPasmurno = view.findViewById(R.id.weatherTVMain);
-//        mPasmurno.setText("Пасмурно");
-//
-//        temperatureView = view.findViewById(R.id.button);
-//        temperatureView.setTemperatureLevel(temp);
 
 
 
@@ -201,5 +187,6 @@ public class MainFragment extends Fragment {
         String currentCity= Singleton.getSingleton().getCurrentCity();
         activity.getSupportActionBar().setTitle(currentCity);
     }
+
 
 }
