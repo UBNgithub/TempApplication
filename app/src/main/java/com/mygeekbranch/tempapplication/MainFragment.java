@@ -1,10 +1,12 @@
 package com.mygeekbranch.tempapplication;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,8 @@ public class MainFragment extends Fragment {
     Toolbar toolbar;
     TemperatureView temperatureView;
     List<WeekWeatherModel> weekList;
+    public float temp;
+    public Button setTempCastView;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -85,32 +89,84 @@ public class MainFragment extends Fragment {
         Date date = new Date();
         dateText.setText(date.toString());
 
-        //String temp = Singleton.getSingleton().temperature;
-        float temp = Singleton.getSingleton().getTemperatureFloat();
+
         mTemperature = view.findViewById(R.id.temperatureTVMain);
-
-        mTemperature.setText(temp + " °");
-
         mPasmurno = view.findViewById(R.id.weatherTVMain);
+        temperatureView = view.findViewById(R.id.button);
+
+        temp = Singleton.getSingleton().getTemperatureFloat();
+        mTemperature.setText(temp + " °");
         mPasmurno.setText("Пасмурно");
 
-        temperatureView = view.findViewById(R.id.button);
+
+
         temperatureView.setTemperatureLevel(temp);
 
-       // toolbar = (Toolbar) getActivity().findViewById(R.id.toolbarMain);
-        //toolbar.setTitle(Singleton.getSingleton().getCurrentCity());
-       // toolbar.inflateMenu(R.menu.main);
-       // toolbar.setNavigationIcon(null);
+
+
+        setTempCastView = view.findViewById(R.id.SetButton);
+        setTempCastView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(),"Set temp clikc", Toast.LENGTH_SHORT).show();
+               // Singleton.getSingleton().setTemperatureFloat(20.0f);
+
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container_main, MainFragment.newInstance(null, null))
+                        .commit();
+
+            }
+        });
+// использую поток чтобы обновить главный фрагмент
+        // т.к. запрос API происходит в отдельном потоке а View уже инициализировалась
+       Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+            if (Singleton.getSingleton().getMainFragmentCount() == 0){
+
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container_main, MainFragment.newInstance(null, null))
+                        .commit();
+
+                Log.d("Поток", "run: ");
+                Singleton.getSingleton().setMainFragmentCount(100);
+            }
+
+            }
+        };
+        handler.postDelayed(runnable, 1000);
+       // handler.post(runnable);
 
 
 
 
-        // toolbar.setTitle("CurrentCity");
+
+
+
+
+
+
+//         temp = Singleton.getSingleton().getTemperatureFloat();
+//        mTemperature = view.findViewById(R.id.temperatureTVMain);
+//        mTemperature.setText(temp + " °");
+//
+//        mPasmurno = view.findViewById(R.id.weatherTVMain);
+//        mPasmurno.setText("Пасмурно");
+//
+//        temperatureView = view.findViewById(R.id.button);
+//        temperatureView.setTemperatureLevel(temp);
+
+
 
         initListWeekWeather();
         initRecyclerView(view);
         apdateAppBar();
     }
+
+
 
     private void initRecyclerView(View view) {
         RecyclerView recyclerView = view.findViewById(R.id.week_recyclerView2);

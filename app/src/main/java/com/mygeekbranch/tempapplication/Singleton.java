@@ -13,17 +13,19 @@ public class Singleton {
     private boolean isCheckNightMode;
     private List<String> cityList;
     private  String currentCity;
+    private  int mainFragmentCount;
 
 
     public Singleton() {
 
         temperature = "0";
-        temperatureFloat = 1.0f;
+        temperatureFloat = 0.0f;
         isCheckHumidity = false;
         isCheckNightMode = false;
         cityList = new ArrayList<>();
         cityList.add("Cheboksary");
         currentCity = "Cheboksary";
+        mainFragmentCount = 0;
 
     }
 
@@ -31,6 +33,14 @@ public class Singleton {
         if (sSingleton == null)
             sSingleton = new Singleton();
         return sSingleton;
+    }
+
+    public int getMainFragmentCount() {
+        return mainFragmentCount;
+    }
+
+    public void setMainFragmentCount(int mainFragmentCount) {
+        this.mainFragmentCount = mainFragmentCount;
     }
 
     public float getTemperatureFloat() {
@@ -79,14 +89,14 @@ public class Singleton {
         isCheckNightMode = checkNightMode;
     }
 
-//    public void increaseTemperature() {
-//        temperature++;
-//
-//    }
-//
-//    public void decreaseTemperature() {
-//        temperature--;
-//    }
+    public void increaseTemperature() {
+        temperatureFloat++;
+
+    }
+
+    public void decreaseTemperature() {
+        temperatureFloat--;
+    }
 
 
 }

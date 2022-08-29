@@ -34,7 +34,7 @@ public class TemperatureView extends View {
     //Высота элемента
     private int height = 0;
     // Уровень температуры
-    private float temperatureLevel = 100.0f;
+    private float temperatureLevel = 80.0f;
     //константы
     //Отступы элементов
     private  final  static int padding = 10;
