@@ -1,6 +1,11 @@
 package com.mygeekbranch.tempapplication;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -21,6 +26,7 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.mygeekbranch.tempapplication.modelWeather.GetUrlData;
 import com.mygeekbranch.tempapplication.modelWeather.GetWeatherData;
+import com.mygeekbranch.tempapplication.modelWeather.GetWeatherService;
 import com.mygeekbranch.tempapplication.modelWeather.GetWeatherWorker;
 import com.mygeekbranch.tempapplication.modelWeather.WeatherInit;
 
@@ -35,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         instance = this;
+        initNotificationChannel();
 
         // Запрос погоды с сервера
         //WeatherInit.Init();
@@ -43,7 +50,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //GetUrlData.Init();
 
         // Запрос с сервера через Workmanager
-        WeatherInit();
+       // WeatherInit();
+
+        // Запрос с сервера через Service
+        startService(new Intent(MainActivity.this, GetWeatherService.class));
 
 
 
@@ -161,6 +171,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        getMenuInflater().inflate(R.menu.main, menu);
 //        return true;
 //    }
+    // Метод для получения экземпляра MainActivity Другим классом
     public static MainActivity getInstance() {
         return instance;
     }
@@ -241,12 +252,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(MainActivity.this, "Нажата CANCEL", Toast.LENGTH_LONG).show();
         }
     };
-    private  void WeatherInit(){
+    public   void WeatherInit(){
         OneTimeWorkRequest workRequest = new OneTimeWorkRequest
                 .Builder(GetWeatherWorker.class)
                 // .setInitialDelay(5,TimeUnit.SECONDS)
                 .build();
         WorkManager workManager = WorkManager.getInstance(MainActivity.this);
         workManager.enqueue(workRequest);
+    }
+    // На Андроидах версии 26 и выше необходимо создавать канал нотификации
+    // На старых версиях канал создавать не надо
+    private  void initNotificationChannel(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            int impotance = NotificationManager.IMPORTANCE_LOW;
+            NotificationChannel mChannal = new NotificationChannel("2", "name", impotance);
+            notificationManager.createNotificationChannel(mChannal);
+        }
     }
 }

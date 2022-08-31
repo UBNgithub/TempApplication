@@ -1,5 +1,8 @@
 package com.mygeekbranch.tempapplication;
 
+import android.app.NotificationManager;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -14,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +27,9 @@ import androidx.work.WorkManager;
 import androidx.work.impl.WorkManagerImpl;
 
 
+import com.mygeekbranch.tempapplication.modelWeather.GetUrlData;
+
+import com.mygeekbranch.tempapplication.modelWeather.GetWeatherService;
 import com.mygeekbranch.tempapplication.modelWeather.GetWeatherWorker;
 import com.mygeekbranch.tempapplication.modelWeather.WeatherInit;
 
@@ -112,13 +119,13 @@ public class MainFragment extends Fragment {
         setTempCastView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"Set temp click", Toast.LENGTH_SHORT).show();
-                OneTimeWorkRequest workRequest = new OneTimeWorkRequest
-                        .Builder(GetWeatherWorker.class)
-                       // .setInitialDelay(5,TimeUnit.SECONDS)
-                        .build();
-                WorkManager workManager = WorkManager.getInstance(getActivity());
-                workManager.enqueue(workRequest);
+               // Toast.makeText(getActivity(),"Set temp click", Toast.LENGTH_SHORT).show();
+                MainActivity.getInstance().startService(new Intent(getActivity(), GetWeatherService.class));
+               //makeNote("Нотификация");
+              //MainActivity.getInstance().WeatherInit();
+                GetUrlData.Init();
+
+
 
             }
         });
@@ -136,7 +143,7 @@ public class MainFragment extends Fragment {
                         .commit();
 
                 Log.d("Поток", "run: ");
-                Singleton.getSingleton().setMainFragmentCount(100);
+                Singleton.getSingleton().setMainFragmentCount(1);
             }
 
             }
@@ -187,6 +194,16 @@ public class MainFragment extends Fragment {
         String currentCity= Singleton.getSingleton().getCurrentCity();
         activity.getSupportActionBar().setTitle(currentCity);
     }
+    // Метод с нотификацией:
+    private void makeNote(String message){
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), "2")
+                .setSmallIcon(R.drawable.icon)
+                .setContentTitle("Main Fragment notification")
+                .setContentText(message);
+        NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(0, builder.build());
+    }
+
 
 
 }

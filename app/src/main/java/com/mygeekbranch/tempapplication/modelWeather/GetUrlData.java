@@ -59,12 +59,20 @@ public class GetUrlData {
                     } catch (IOException e) {
                         Log.e(TAG, "FAIL CONECTION", e);
                         e.printStackTrace();
-                        handler.post(new Runnable() {
+
+                        MainActivity.getInstance().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 MainActivity.getInstance().showError();
                             }
                         });
+
+//                        handler.post(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                MainActivity.getInstance().showError();
+//                            }
+//                        });
                     } finally {
                         if (urlConnection != null)
                             urlConnection.disconnect();
