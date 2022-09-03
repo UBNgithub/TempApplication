@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 import javax.net.ssl.HttpsURLConnection;
 
-
+// Класс запроса погоды с сервера. 1-й Способ.
 public class WeatherInit {
 //    private static Activity activity;
 //

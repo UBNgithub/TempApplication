@@ -8,12 +8,13 @@ import java.util.List;
 public class Singleton {
     private static Singleton sSingleton;
     String temperature;
-    private  float temperatureFloat;
+    private float temperatureFloat;
     private boolean isCheckHumidity;
     private boolean isCheckNightMode;
     private List<String> cityList;
     private  String currentCity;
     private  int mainFragmentCount;
+
 
 
     public Singleton() {

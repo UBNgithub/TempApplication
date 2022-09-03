@@ -7,6 +7,7 @@ import com.mygeekbranch.tempapplication.MainActivity;
 import com.mygeekbranch.tempapplication.Singleton;
 
 // Класс обработки строки полученной из погодного сервера
+//вызывается другим классом GetUrlData
 public class GetWeatherData {
     public  static void getData(String result){
         Gson gson = new Gson();

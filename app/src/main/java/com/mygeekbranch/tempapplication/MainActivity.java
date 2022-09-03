@@ -28,6 +28,7 @@ import com.mygeekbranch.tempapplication.modelWeather.GetUrlData;
 import com.mygeekbranch.tempapplication.modelWeather.GetWeatherData;
 import com.mygeekbranch.tempapplication.modelWeather.GetWeatherService;
 import com.mygeekbranch.tempapplication.modelWeather.GetWeatherWorker;
+import com.mygeekbranch.tempapplication.modelWeather.OkHttpRequest;
 import com.mygeekbranch.tempapplication.modelWeather.WeatherInit;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -43,17 +44,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         instance = this;
         initNotificationChannel();
 
-        // Запрос погоды с сервера
+        // 1-й способ. Запрос погоды с сервера
         //WeatherInit.Init();
 
-        // Запрос погоды с сервера из отдельного класса
+        // 2-й способ. Запрос погоды с сервера из отдельного класса
+        // ипользуется 2 отдельных класса:
+        // 1-й GetUrlData -получение данных из сервера
+        // 2-й GetWeatherData - обработка данных
         //GetUrlData.Init();
 
-        // Запрос с сервера через Workmanager
-       // WeatherInit();
+        // 3-й способ. Запрос с сервера через Workmanager
+        // WeatherInit();
 
-        // Запрос с сервера через Service
-        startService(new Intent(MainActivity.this, GetWeatherService.class));
+        // 4-й способ. Запрос с сервера через Service
+        //startService(new Intent(MainActivity.this, GetWeatherService.class));
+
+        // 5-й способ. через OkHttp
+        OkHttpRequest.run("https://api.openweathermap.org/data/2.5/weather?q=Cheboksary,RU&units=metric&appid=f61adcb6ab99fd0e42d9728a4eea3df7");
 
 
 
@@ -142,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                            CityDialogFragment cityDialogFragment = new CityDialogFragment();
 //                            cityDialogFragment.show(getSupportFragmentManager(), "cityDialogFragment");
                             CityBottomSheetDialogFragment dialogFragment = CityBottomSheetDialogFragment.newInstance();
-                            dialogFragment.show(getSupportFragmentManager(),"CityBottomSheetDialogFragment");
+                            dialogFragment.show(getSupportFragmentManager(), "CityBottomSheetDialogFragment");
 
 
                             break;
@@ -241,7 +248,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private  OnDialogListener dialogListener = new OnDialogListener() {
+    private OnDialogListener dialogListener = new OnDialogListener() {
         @Override
         public void onDialogset() {
             Toast.makeText(MainActivity.this, "Нажата SET", Toast.LENGTH_LONG).show();
@@ -252,7 +259,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(MainActivity.this, "Нажата CANCEL", Toast.LENGTH_LONG).show();
         }
     };
-    public   void WeatherInit(){
+
+    public void WeatherInit() {
         OneTimeWorkRequest workRequest = new OneTimeWorkRequest
                 .Builder(GetWeatherWorker.class)
                 // .setInitialDelay(5,TimeUnit.SECONDS)
@@ -260,10 +268,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         WorkManager workManager = WorkManager.getInstance(MainActivity.this);
         workManager.enqueue(workRequest);
     }
+
     // На Андроидах версии 26 и выше необходимо создавать канал нотификации
     // На старых версиях канал создавать не надо
-    private  void initNotificationChannel(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+    private void initNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             int impotance = NotificationManager.IMPORTANCE_LOW;
             NotificationChannel mChannal = new NotificationChannel("2", "name", impotance);
