@@ -1,5 +1,5 @@
 package com.mygeekbranch.tempapplication.modelWeather;
-//Класс получение данных с погодного сервера
+//Класс получение данных с погодного сервера 2-й способ
 // и сохранения результата в строке
 
 import android.os.Build;

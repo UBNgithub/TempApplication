@@ -11,8 +11,9 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
+// // 5-й способ. Получение данных из погодного API через OkHttp
 public class OkHttpRequest {
+    private final static String TAG = "OkHttpRequest";
 
     public static void run(String url){
         OkHttpClient client = new OkHttpClient();
@@ -41,6 +42,7 @@ public class OkHttpRequest {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String answer =response.body().string();
+                Log.d(TAG, answer);
                 // синхронизируем поток с потоком UI
                 handler.post(new Runnable() {
                     @Override

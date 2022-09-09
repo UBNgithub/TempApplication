@@ -1,12 +1,12 @@
 package com.mygeekbranch.tempapplication.modelWeather;
 
-import android.app.Activity;
 import android.os.Handler;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.mygeekbranch.tempapplication.MainActivity;
 import com.mygeekbranch.tempapplication.Singleton;
+import com.mygeekbranch.tempapplication.modelWeather.model.WeatherRequest;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,8 +28,9 @@ public class WeatherInit {
     private final static String TAG = "Weather";
     private final static String WEATHER_URL =
             // "https://api.openweathermap.org/data/2.5/weather?lat=55.75&lon=37.62&appid=";
-    //"https://api.openweathermap.org/data/2.5/weather?lat=55.75&lon=37.62&units=metric&appid=";
-    "https://api.openweathermap.org/data/2.5/weather?q=Cheboksary,RU&units=metric&appid=";
+    "https://api.openweathermap.org/data/2.5/weather?lat=55.75&lon=37.62&units=metric&appid=";
+
+   // "https://api.openweathermap.org/data/2.5/weather?q=Cheboksary,RU&units=metric&appid=";
     private static final String WEATHER_API_KEY = "f61adcb6ab99fd0e42d9728a4eea3df7";
 
 

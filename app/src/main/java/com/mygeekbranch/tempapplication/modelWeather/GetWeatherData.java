@@ -3,8 +3,8 @@ package com.mygeekbranch.tempapplication.modelWeather;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.mygeekbranch.tempapplication.MainActivity;
 import com.mygeekbranch.tempapplication.Singleton;
+import com.mygeekbranch.tempapplication.modelWeather.model.WeatherRequest;
 
 // Класс обработки строки полученной из погодного сервера
 //вызывается другим классом GetUrlData

@@ -26,6 +26,7 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.mygeekbranch.tempapplication.modelWeather.GetUrlData;
 import com.mygeekbranch.tempapplication.modelWeather.GetWeatherData;
+import com.mygeekbranch.tempapplication.modelWeather.GetWeatherRetrofit;
 import com.mygeekbranch.tempapplication.modelWeather.GetWeatherService;
 import com.mygeekbranch.tempapplication.modelWeather.GetWeatherWorker;
 import com.mygeekbranch.tempapplication.modelWeather.OkHttpRequest;
@@ -60,7 +61,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //startService(new Intent(MainActivity.this, GetWeatherService.class));
 
         // 5-й способ. через OkHttp
-        OkHttpRequest.run("https://api.openweathermap.org/data/2.5/weather?q=Cheboksary,RU&units=metric&appid=f61adcb6ab99fd0e42d9728a4eea3df7");
+        //OkHttpRequest.run("https://api.openweathermap.org/data/2.5/weather?q=Cheboksary,RU&units=metric&appid=f61adcb6ab99fd0e42d9728a4eea3df7");
+
+        // 6-й способ. через Retrofit
+         GetWeatherRetrofit.initRetrofit();
 
 
 
