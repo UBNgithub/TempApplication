@@ -14,6 +14,7 @@ public class Singleton {
     private List<String> cityList;
     private  String currentCity;
     private  int mainFragmentCount;
+    private String icon;
 
 
 
@@ -27,6 +28,7 @@ public class Singleton {
         cityList.add("Cheboksary");
         currentCity = "Cheboksary";
         mainFragmentCount = 0;
+        icon = "10d";
 
     }
 
@@ -34,6 +36,14 @@ public class Singleton {
         if (sSingleton == null)
             sSingleton = new Singleton();
         return sSingleton;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public int getMainFragmentCount() {

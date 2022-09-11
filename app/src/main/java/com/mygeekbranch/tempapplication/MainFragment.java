@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,9 +30,12 @@ import androidx.work.impl.WorkManagerImpl;
 
 import com.mygeekbranch.tempapplication.modelWeather.GetUrlData;
 
+import com.mygeekbranch.tempapplication.modelWeather.GetWeatherRetrofit;
 import com.mygeekbranch.tempapplication.modelWeather.GetWeatherService;
 import com.mygeekbranch.tempapplication.modelWeather.GetWeatherWorker;
 import com.mygeekbranch.tempapplication.modelWeather.WeatherInit;
+import com.mygeekbranch.tempapplication.modelWeather.model.Weather;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,6 +52,7 @@ public class MainFragment extends Fragment {
     List<WeekWeatherModel> weekList;
     public float temp;
     public Button setTempCastView;
+    private ImageView imageViewMain;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -66,7 +71,6 @@ public class MainFragment extends Fragment {
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
-
         return fragment;
     }
 
@@ -80,7 +84,6 @@ public class MainFragment extends Fragment {
         //WeatherInit.Init(getActivity());
         //Toast.makeText(getActivity(), Singleton.getSingleton().getTemperature(), Toast.LENGTH_LONG).show();
         Log.d("TEMPERATURE MaimFragment =", Singleton.getSingleton().getTemperature());
-
 
 
     }
@@ -114,44 +117,48 @@ public class MainFragment extends Fragment {
         temperatureView.setTemperatureLevel(temp);
 
 
-
         setTempCastView = view.findViewById(R.id.SetButton);
         setTempCastView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Toast.makeText(getActivity(),"Set temp click", Toast.LENGTH_SHORT).show();
-                MainActivity.getInstance().startService(new Intent(getActivity(), GetWeatherService.class));
-               //makeNote("Нотификация");
-              //MainActivity.getInstance().WeatherInit();
-                GetUrlData.Init();
-
+                //Toast.makeText(getActivity(),"Set temp click", Toast.LENGTH_SHORT).show();
+               // MainActivity.getInstance().startService(new Intent(getActivity(), GetWeatherService.class));
+               // makeNote("Нотификация");
+                //MainActivity.getInstance().WeatherInit();
+               // GetUrlData.Init();
+               // GetWeatherRetrofit.initRetrofit();
+                Toast.makeText(getActivity(),Singleton.getSingleton().getCurrentCity(), Toast.LENGTH_SHORT).show();
+                float temp = Singleton.getSingleton().getTemperatureFloat();
+                String tempString = String.valueOf(temp);
+                Toast.makeText(getActivity(),tempString, Toast.LENGTH_SHORT).show();
 
 
             }
         });
+        imageViewMain = (ImageView) view.findViewById(R.id.imageViewMain);
+        setImagePicasso();
+
 // использую поток чтобы обновить главный фрагмент
         // т.к. запрос API происходит в отдельном потоке а View уже инициализировалась
-       Handler handler = new Handler();
+        Handler handler = new Handler();
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-            if (Singleton.getSingleton().getMainFragmentCount() == 0){
+                if (Singleton.getSingleton().getMainFragmentCount() == 0) {
 
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container_main, MainFragment.newInstance(null, null))
-                        .commit();
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container_main, MainFragment.newInstance(null, null))
+                            .commit();
 
-                Log.d("Поток", "run: ");
-                Singleton.getSingleton().setMainFragmentCount(1);
-            }
+                    Log.d("Поток", "run: ");
+                    Singleton.getSingleton().setMainFragmentCount(1);
+                }
 
             }
         };
         handler.postDelayed(runnable, 1000);
-       // handler.post(runnable);
-
-
+        // handler.post(runnable);
 
 
         initListWeekWeather();
@@ -159,6 +166,17 @@ public class MainFragment extends Fragment {
         apdateAppBar();
     }
 
+    private void setImagePicasso() {
+       // String iconImageWR = "10d";
+        String iconImageWR = Singleton.getSingleton().getIcon();
+
+
+        String path = "http://openweathermap.org/img/wn/" +iconImageWR + "@2x.png";
+        Picasso.get()
+                .load(path)
+                .error(R.drawable.icon)
+                .into(imageViewMain);
+    }
 
 
     private void initRecyclerView(View view) {
@@ -189,13 +207,15 @@ public class MainFragment extends Fragment {
         weekList.add(new WeekWeatherModel("СБ", "+18°"));
         weekList.add(new WeekWeatherModel("ВС", "+20°"));
     }
-    private  void apdateAppBar (){
+
+    private void apdateAppBar() {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
-        String currentCity= Singleton.getSingleton().getCurrentCity();
+        String currentCity = Singleton.getSingleton().getCurrentCity();
         activity.getSupportActionBar().setTitle(currentCity);
     }
+
     // Метод с нотификацией:
-    private void makeNote(String message){
+    private void makeNote(String message) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), "2")
                 .setSmallIcon(R.drawable.icon)
                 .setContentTitle("Main Fragment notification")
@@ -203,7 +223,6 @@ public class MainFragment extends Fragment {
         NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, builder.build());
     }
-
 
 
 }

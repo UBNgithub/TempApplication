@@ -4,7 +4,10 @@ package com.mygeekbranch.tempapplication.modelWeather;
 import android.util.Log;
 
 import com.mygeekbranch.tempapplication.Singleton;
+import com.mygeekbranch.tempapplication.modelWeather.model.Weather;
 import com.mygeekbranch.tempapplication.modelWeather.model.WeatherRequest;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -14,11 +17,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GetWeatherRetrofit {
     private static final float AbsoluteZero = -273.15f;
-    private static final String city = "Cheboksary, ru";
+    //private static final String city = "Tokyo";
+    // private static final String city = Singleton.getSingleton().getCurrentCity();
+
     private static final String WEATHER_API_KEY = "f61adcb6ab99fd0e42d9728a4eea3df7";
     public static OpenWeather openWeather;
 
     public static void initRetrofit() {
+       String city = Singleton.getSingleton().getCurrentCity();
         Retrofit retrofit;
         retrofit = new Retrofit.Builder()
        // "https://api.openweathermap.org/data/2.5/weather?lat=55.75&lon=37.62&units=metric&appid="
@@ -28,7 +34,10 @@ public class GetWeatherRetrofit {
                 .build();
         openWeather = retrofit.create(OpenWeather.class);
         requestRetrofit(city, WEATHER_API_KEY);
+
         Log.d("RETROFIT","initRetrofit");
+        Log.d("RETROFIT", "город " +city);
+
 
     }
      public static void requestRetrofit(String city, String keyApi){
@@ -41,7 +50,13 @@ public class GetWeatherRetrofit {
                         if (response.body() != null){
                             float result = response.body().getMain().getTemp();
                             Singleton.getSingleton().setTemperatureFloat(result);
-                            Log.d("RETROFIT", String.valueOf(result ));
+
+                            String icon = response.body().getWeather().get(0).getIcon();
+                            Singleton.getSingleton().setIcon(icon);
+
+                            Log.d("RETROFIT", "teerature " + String.valueOf(result ));
+
+                            Log.d("RETROFIT", "icon "+ icon);
 
                         }
                     }
@@ -50,6 +65,7 @@ public class GetWeatherRetrofit {
                     public void onFailure(Call<WeatherRequest> call, Throwable t) {
                         String tt = t.toString();
                         Log.d("RETROFIT  ","onFailure =" +tt);
+
 
                     }
                 });
