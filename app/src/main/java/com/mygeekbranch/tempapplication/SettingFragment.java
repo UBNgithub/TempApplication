@@ -1,6 +1,8 @@
 package com.mygeekbranch.tempapplication;
 
 import android.app.ActionBar;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,19 +22,20 @@ import android.widget.TextView;
 
 
 public class SettingFragment extends Fragment {
-    SwitchCompat mSwitch;
-    CheckBox mCheckBoxHim;
-    CheckBox mCheckBoxSpeed;
-    CheckBox mCheckBoxPrecip;
-    TextView mTextViewHim;
+    private SwitchCompat mSwitch;
+    private CheckBox mCheckBoxHim;
+    private CheckBox mCheckBoxSpeed;
+    private CheckBox mCheckBoxPrecip;
+    private TextView mTextViewHim;
     boolean isCheckHum;
     boolean isCheckNightMode;
-   float mTemperature;
-    Button mSetTemperature;
-    Button mIncTemperature;
-    Button mDecTemperature;
-    TextView mChangeTempText;
-    Toolbar toolbar;
+    private float mTemperature;
+    private Button mSetTemperature;
+    private Button mIncTemperature;
+    private Button mDecTemperature;
+    private TextView mChangeTempText;
+    private Toolbar toolbar;
+    private SharedPreferences sharedPreferences;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -73,6 +76,7 @@ public class SettingFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        initPreferensis();
     }
 
     @Override
@@ -84,7 +88,9 @@ public class SettingFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Fragment Setting");
+
+
+
 
         isCheckNightMode = Singleton.getSingleton().isCheckNightMode();
         mSwitch = view.findViewById(R.id.switch2);
@@ -105,7 +111,8 @@ public class SettingFragment extends Fragment {
         mTextViewHim = view.findViewById(R.id.textViewHim);
         setTextViewHim();
         mCheckBoxHim = view.findViewById(R.id.checkBoxHimidity);
-        mCheckBoxHim.setChecked(Singleton.getSingleton().isCheckHumidity());
+        //mCheckBoxHim.setChecked(Singleton.getSingleton().isCheckHumidity());
+        mCheckBoxHim.setChecked(sharedPreferences.getBoolean("isCheckHumidity", false));
         mCheckBoxHim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,6 +121,7 @@ public class SettingFragment extends Fragment {
                 else
                     mTextViewHim.setText(Boolean.toString(false));
                 Singleton.getSingleton().setCheckHumidity(mCheckBoxHim.isChecked());
+                savePreferences(mCheckBoxHim.isChecked());
                 setTextViewHim();
 
             }
@@ -129,7 +137,7 @@ public class SettingFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Singleton.getSingleton().increaseTemperature();
-              mTemperature = Singleton.getSingleton().getTemperatureFloat();
+                mTemperature = Singleton.getSingleton().getTemperatureFloat();
                 mChangeTempText.setText("Температура : " + mTemperature + " °");
 
             }
@@ -145,24 +153,41 @@ public class SettingFragment extends Fragment {
         });
 
         //((AppCompatActivity) getActivity()).getSupportActionBar(toolbar);
-       // toolbar = (Toolbar) getActivity().findViewById(R.id.toolbarMain);
-       //toolbar.setTitle("Setting");
-       // toolbar.setNavigationIcon(null);
-
-
-
+        // toolbar = (Toolbar) getActivity().findViewById(R.id.toolbarMain);
+        //toolbar.setTitle("Setting");
+        // toolbar.setNavigationIcon(null);
 
 
     }
+
+
+
 
     public void setTextViewHim() {
-        mTextViewHim.setText("Влажность: "+ Boolean.toString(Singleton.getSingleton().isCheckHumidity()));
+        mTextViewHim.setText("Влажность: " + Boolean.toString(Singleton.getSingleton().isCheckHumidity()));
     }
-    private  void apdateAppBar (){
+
+    private void apdateAppBar() {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
-        String currentCity= "Setting";
+        String currentCity = "Setting";
         activity.getSupportActionBar().setTitle(currentCity);
     }
+    private void initPreferensis() {
+        sharedPreferences = MainActivity.getInstance().getPreferences(Context.MODE_PRIVATE);
+        //loadPreferences();
+    }
+     //Загрузка настроек
+    private void loadPreferences() {
+        Boolean loadIsCheckHumidity = sharedPreferences.getBoolean("isCheckHumidity", false);
+    }
+    //Сохранение настроек
+    private void savePreferences(Boolean isCheckHum){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("isCheckHumidity",isCheckHum);
+        editor.commit();
+
+    }
+
 
 
 }

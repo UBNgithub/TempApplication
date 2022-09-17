@@ -1,20 +1,23 @@
 package com.mygeekbranch.tempapplication;
 
+import android.content.SharedPreferences;
+
 import com.mygeekbranch.tempapplication.modelWeather.WeatherInit;
 
 import java.util.ArrayList;
 import java.util.List;
-
+// Класс синглтон для сохнанения сосояний
 public class Singleton {
     private static Singleton sSingleton;
     String temperature;
     private float temperatureFloat;
-    private boolean isCheckHumidity;
+    private boolean isCheckHumidity;  // для сохранения состояния чекбокс "Влажность"
     private boolean isCheckNightMode;
     private List<String> cityList;
     private  String currentCity;
     private  int mainFragmentCount;
     private String icon;
+
 
 
 
