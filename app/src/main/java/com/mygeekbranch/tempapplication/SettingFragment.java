@@ -173,7 +173,7 @@ public class SettingFragment extends Fragment {
         activity.getSupportActionBar().setTitle(currentCity);
     }
     private void initPreferensis() {
-        sharedPreferences = MainActivity.getInstance().getPreferences(Context.MODE_PRIVATE);
+        sharedPreferences = MainActivity.getInstance().getSharedPreferences("SettingSP",0);
         //loadPreferences();
     }
      //Загрузка настроек
