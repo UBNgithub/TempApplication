@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<!--    <item-->
-<!--        android:id="@+id/item1"-->
-<!--        app:showAsAction="always"-->
-<!--        android:icon="@drawable/setting"-->
-<!--        android:title="setting" />-->
-<!--    <item-->
-<!--        android:id="@+id/city"-->
-<!--        android:icon="@drawable/city"-->
-<!--        android:title="City"-->
-<!--        app:showAsAction="ifRoom" />-->
+    <item
+        android:id="@+id/item1"
+        app:showAsAction="always"
+        android:icon="@drawable/setting"
+        android:title="setting" />
+    <item
+        android:id="@+id/city"
+        android:icon="@drawable/city"
+        android:title="City"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/about"

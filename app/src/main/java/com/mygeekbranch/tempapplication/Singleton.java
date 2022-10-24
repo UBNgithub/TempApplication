@@ -29,6 +29,10 @@ public class Singleton {
         isCheckNightMode = false;
         cityList = new ArrayList<>();
         cityList.add("Cheboksary");
+        cityList.add("Moscow");
+        cityList.add("Omsk");
+        cityList.add("Kazan");
+        cityList.add("Tokyo");
         currentCity = "Cheboksary";
         mainFragmentCount = 0;
         icon = "10d";

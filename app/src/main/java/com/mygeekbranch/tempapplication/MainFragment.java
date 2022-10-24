@@ -3,6 +3,7 @@ package com.mygeekbranch.tempapplication;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -48,11 +49,13 @@ public class MainFragment extends Fragment {
     TextView mTemperature;
     TextView mPasmurno;
     Toolbar toolbar;
+
     TemperatureView temperatureView;
     List<WeekWeatherModel> weekList;
     public float temp;
     public Button setTempCastView;
     private ImageView imageViewMain;
+    SharedPreferences sharedPreferences;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -84,6 +87,7 @@ public class MainFragment extends Fragment {
         //WeatherInit.Init(getActivity());
         //Toast.makeText(getActivity(), Singleton.getSingleton().getTemperature(), Toast.LENGTH_LONG).show();
         Log.d("TEMPERATURE MaimFragment =", Singleton.getSingleton().getTemperature());
+        initPreferenses();
 
 
     }
@@ -123,9 +127,9 @@ public class MainFragment extends Fragment {
             public void onClick(View v) {
                 //Toast.makeText(getActivity(),"Set temp click", Toast.LENGTH_SHORT).show();
                // MainActivity.getInstance().startService(new Intent(getActivity(), GetWeatherService.class));
-               // makeNote("Нотификация");
+                makeNote("Нотификация");
                 //MainActivity.getInstance().WeatherInit();
-               // GetUrlData.Init();
+                // GetUrlData.Init();
                // GetWeatherRetrofit.initRetrofit();
                 Toast.makeText(getActivity(),Singleton.getSingleton().getCurrentCity(), Toast.LENGTH_SHORT).show();
                 float temp = Singleton.getSingleton().getTemperatureFloat();
@@ -211,7 +215,11 @@ public class MainFragment extends Fragment {
     private void apdateAppBar() {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         String currentCity = Singleton.getSingleton().getCurrentCity();
-        activity.getSupportActionBar().setTitle(currentCity);
+        //activity.getSupportActionBar().setTitle(currentCity);
+        // Boolean loadIsCheckHumidity = sharedPreferences.getBoolean("isCheckHumidity", false);
+        activity.getSupportActionBar().setTitle(sharedPreferences.getString("currentCity", "City"));
+
+
     }
 
     // Метод с нотификацией:
@@ -222,6 +230,11 @@ public class MainFragment extends Fragment {
                 .setContentText(message);
         NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, builder.build());
+    }
+    //инициализация Preferences
+    private void initPreferenses() {
+        sharedPreferences = MainActivity.getInstance().getSharedPreferences("CitySP",0);
+        //loadPreferences();
     }
 
 

@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -81,12 +82,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Fragment selectfragment = null;
                 switch (item.getItemId()) {
 
-//                    case R.id.item1:
-//                        selectfragment = SettingFragment.newInstance(null, null);
-//                        break;
-//                    case R.id.city:
-//                        selectfragment = CityFragment.newInstance(null, null);
-//                        break;
+                    case R.id.item1:
+                        selectfragment = SettingFragment.newInstance(null, null);
+                        break;
+                    case R.id.city:
+                        selectfragment = CityFragment.newInstance(null, null);
+                        break;
                     case R.id.about:
                         selectfragment = AboutFragment.newInstance(null, null);
                         break;
@@ -177,11 +178,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // toolbar.setTitle(Singleton.getSingleton().getCurrentCity());
     }
 
-    //    @Override
-//    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
+        @Override
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
     // Метод для получения экземпляра MainActivity Другим классом
     public static MainActivity getInstance() {
         return instance;

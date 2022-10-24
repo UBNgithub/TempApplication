@@ -1,6 +1,6 @@
 package com.mygeekbranch.tempapplication;
 
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,14 +15,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.mygeekbranch.tempapplication.dataBase.App;
+import com.mygeekbranch.tempapplication.dataBase.CityDao;
+import com.mygeekbranch.tempapplication.dataBase.CityDatabase;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,6 +36,13 @@ public class CityFragment extends Fragment {
     Toolbar toolbar;
     public TextInputEditText mEditText;
     public List<String> cityList = Singleton.getSingleton().getCityList();
+    SharedPreferences sharedPreferences;
+    // Инициализация БД
+    CityDatabase  db = App.getInstance().getDb();
+    CityDao cityDao = db.getCityDao();
+
+
+
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -69,6 +76,7 @@ public class CityFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        initPreferenses();
     }
 
     @Override
@@ -99,6 +107,7 @@ public class CityFragment extends Fragment {
                                 Toast.makeText(getContext(), "Город выбран", Toast.LENGTH_SHORT).show();
                                 cityList.add(mEditText.getText().toString());
                                 Singleton.getSingleton().setCurrentCity(mEditText.getText().toString());
+                                savePreferences(mEditText.getText().toString());
                                 //getActivity().finish();
                             }
                         }).show();
@@ -126,6 +135,20 @@ public class CityFragment extends Fragment {
         String city = "City";
         activity.getSupportActionBar().setTitle(city);
     }
+    //инициализация Preferences
+    private void initPreferenses() {
+        //sharedPreferences = MainActivity.getInstance().getSharedPreferences("CitySP",0);
+        //loadPreferences();
+        sharedPreferences = App.getInstance().getCitypreferences();
+    }
+    //Сохранение текущего города в SharedPreferences
+    private void savePreferences(String currentCity){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("currentCity",currentCity);
+        editor.commit();
+
+    }
+
 
 
 }

@@ -90,8 +90,6 @@ public class SettingFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-
-
         isCheckNightMode = Singleton.getSingleton().isCheckNightMode();
         mSwitch = view.findViewById(R.id.switch2);
         mSwitch.setChecked(isCheckNightMode);

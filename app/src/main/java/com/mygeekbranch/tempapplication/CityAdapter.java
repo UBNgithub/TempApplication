@@ -2,6 +2,7 @@ package com.mygeekbranch.tempapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +13,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mygeekbranch.tempapplication.dataBase.App;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
     private List< String> cityList ;
+    SharedPreferences sharedPreferences;
+
 
     public CityAdapter(List<String> cityList) {
         this.cityList = cityList;
@@ -51,10 +56,18 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
                 public void onClick(View view) {
                     String city2 = (String) city.getText();
                     Toast.makeText(view.getContext(), city2, Toast.LENGTH_SHORT).show();
-                    String url = "https://ru.wikipedia.org/wiki/"+ city2;
-                    Uri uri = Uri.parse(url);
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                    itemView.getContext().startActivity(intent);
+                    Singleton.getSingleton().setCurrentCity(city2);
+
+                    sharedPreferences = App.getInstance().getCitypreferences();
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("currentCity", city2);
+                    editor.commit();
+
+                    // Запуск интернест страницы википедии
+//                    String url = "https://ru.wikipedia.org/wiki/"+ city2;
+//                    Uri uri = Uri.parse(url);
+//                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                    itemView.getContext().startActivity(intent);
 
 
                 }
