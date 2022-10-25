@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +21,11 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.mygeekbranch.tempapplication.dataBase.App;
+import com.mygeekbranch.tempapplication.dataBase.City;
 import com.mygeekbranch.tempapplication.dataBase.CityDao;
 import com.mygeekbranch.tempapplication.dataBase.CityDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,10 +39,19 @@ public class CityFragment extends Fragment {
     Toolbar toolbar;
     public TextInputEditText mEditText;
     public List<String> cityList = Singleton.getSingleton().getCityList();
+
     SharedPreferences sharedPreferences;
     // Инициализация БД
     CityDatabase  db = App.getInstance().getDb();
     CityDao cityDao = db.getCityDao();
+
+
+
+
+
+
+
+
 
 
 
@@ -109,6 +121,14 @@ public class CityFragment extends Fragment {
                                 Singleton.getSingleton().setCurrentCity(mEditText.getText().toString());
                                 savePreferences(mEditText.getText().toString());
                                 //getActivity().finish();
+
+
+//                                CityDatabase db = App.getInstance().getDb();
+//                                CityDao cityDao = db.getCityDao();
+                                City city= new City();
+                                city.city = mEditText.getText().toString();
+                                cityDao.insertCity(city);
+
                             }
                         }).show();
 

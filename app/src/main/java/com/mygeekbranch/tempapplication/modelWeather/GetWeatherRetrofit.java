@@ -1,9 +1,12 @@
 package com.mygeekbranch.tempapplication.modelWeather;
 //Класс получение данных с погодного сервера используя Retrofit
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.mygeekbranch.tempapplication.MainActivity;
 import com.mygeekbranch.tempapplication.Singleton;
+import com.mygeekbranch.tempapplication.dataBase.App;
 import com.mygeekbranch.tempapplication.modelWeather.model.Weather;
 import com.mygeekbranch.tempapplication.modelWeather.model.WeatherRequest;
 
@@ -19,12 +22,17 @@ public class GetWeatherRetrofit {
     private static final float AbsoluteZero = -273.15f;
     //private static final String city = "Tokyo";
     // private static final String city = Singleton.getSingleton().getCurrentCity();
+//    private static  final SharedPreferences sharedPreferences = MainActivity.getInstance().getSharedPreferences("CitySP",0);
+//    private static final String city2 = sharedPreferences.getString("currentCity", "City");
+
 
     private static final String WEATHER_API_KEY = "f61adcb6ab99fd0e42d9728a4eea3df7";
     public static OpenWeather openWeather;
 
     public static void initRetrofit() {
        String city = Singleton.getSingleton().getCurrentCity();
+
+
         Retrofit retrofit;
         retrofit = new Retrofit.Builder()
        // "https://api.openweathermap.org/data/2.5/weather?lat=55.75&lon=37.62&units=metric&appid="

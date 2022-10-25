@@ -2,10 +2,15 @@ package com.mygeekbranch.tempapplication;
 
 import android.content.SharedPreferences;
 
+import com.mygeekbranch.tempapplication.dataBase.App;
+import com.mygeekbranch.tempapplication.dataBase.City;
+import com.mygeekbranch.tempapplication.dataBase.CityDao;
+import com.mygeekbranch.tempapplication.dataBase.CityDatabase;
 import com.mygeekbranch.tempapplication.modelWeather.WeatherInit;
 
 import java.util.ArrayList;
 import java.util.List;
+
 // Класс синглтон для сохнанения сосояний
 public class Singleton {
     private static Singleton sSingleton;
@@ -14,11 +19,9 @@ public class Singleton {
     private boolean isCheckHumidity;  // для сохранения состояния чекбокс "Влажность"
     private boolean isCheckNightMode;
     private List<String> cityList;
-    private  String currentCity;
-    private  int mainFragmentCount;
+    private String currentCity;
+    private int mainFragmentCount;
     private String icon;
-
-
 
 
     public Singleton() {
@@ -28,14 +31,25 @@ public class Singleton {
         isCheckHumidity = false;
         isCheckNightMode = false;
         cityList = new ArrayList<>();
-        cityList.add("Cheboksary");
-        cityList.add("Moscow");
-        cityList.add("Omsk");
-        cityList.add("Kazan");
-        cityList.add("Tokyo");
+//        cityList.add("Cheboksary");
+//        cityList.add("Moscow");
+//        cityList.add("Omsk");
+//        cityList.add("Kazan");
+//        cityList.add("Tokyo");
         currentCity = "Cheboksary";
         mainFragmentCount = 0;
         icon = "10d";
+
+        CityDatabase db = App.getInstance().getDb();
+        CityDao cityDao = db.getCityDao();
+
+        List<City> cityList2 = cityDao.getAllCity();
+        for (int i = 0; i < cityList2.size(); i++) {
+            String c = cityList2.get(i).city;
+            cityList.add(c);
+        }
+        SharedPreferences sharedPreferences = MainActivity.getInstance().getSharedPreferences("CitySP", 0);
+        currentCity = sharedPreferences.getString("currentCity", "City");
 
     }
 
@@ -80,7 +94,6 @@ public class Singleton {
     public List<String> getCityList() {
         return cityList;
     }
-
 
 
     public String getTemperature() {

@@ -135,6 +135,11 @@ public class MainFragment extends Fragment {
                 float temp = Singleton.getSingleton().getTemperatureFloat();
                 String tempString = String.valueOf(temp);
                 Toast.makeText(getActivity(),tempString, Toast.LENGTH_SHORT).show();
+                GetWeatherRetrofit.initRetrofit();
+                temp = Singleton.getSingleton().getTemperatureFloat();
+                mTemperature.setText(temp + " °");
+
+
 
 
             }
