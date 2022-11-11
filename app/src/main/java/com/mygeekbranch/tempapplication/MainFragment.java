@@ -166,7 +166,7 @@ public class MainFragment extends Fragment {
 
             }
         };
-        handler.postDelayed(runnable, 1000);
+        handler.postDelayed(runnable, 900);
         // handler.post(runnable);
 
 
