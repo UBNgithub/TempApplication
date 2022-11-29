@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -114,7 +115,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView2);
         bottomNavigationView.setOnItemSelectedListener(itemSelectedListener2);
 
-        registerReceiver(receiver, new IntentFilter(Intent.ACTION_POWER_DISCONNECTED));
+        //registerReceiver(receiver, new IntentFilter(Intent.ACTION_POWER_DISCONNECTED));
+        registerReceiver(receiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
 
     }
