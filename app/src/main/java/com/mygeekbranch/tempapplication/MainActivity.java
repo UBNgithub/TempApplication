@@ -2,9 +2,11 @@ package com.mygeekbranch.tempapplication;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -35,6 +37,7 @@ import com.mygeekbranch.tempapplication.modelWeather.WeatherInit;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
+    BroadcastReceiver receiver = new Receiver();
 
     private static MainActivity instance;
 
@@ -65,8 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //OkHttpRequest.run("https://api.openweathermap.org/data/2.5/weather?q=Cheboksary,RU&units=metric&appid=f61adcb6ab99fd0e42d9728a4eea3df7");
 
         // 6-й способ. через Retrofit
-         GetWeatherRetrofit.initRetrofit();
-
+        GetWeatherRetrofit.initRetrofit();
 
 
         toolbar = findViewById(R.id.toolbarMain);
@@ -111,6 +113,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView2);
         bottomNavigationView.setOnItemSelectedListener(itemSelectedListener2);
+
+        registerReceiver(receiver, new IntentFilter(Intent.ACTION_POWER_DISCONNECTED));
 
 
     }
@@ -178,11 +182,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // toolbar.setTitle(Singleton.getSingleton().getCurrentCity());
     }
 
-        @Override
+    @Override
     public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
     // Метод для получения экземпляра MainActivity Другим классом
     public static MainActivity getInstance() {
         return instance;
