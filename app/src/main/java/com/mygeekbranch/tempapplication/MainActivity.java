@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onDestroy() {
         super.onDestroy();
         //Отписываемся от BroadcastReceiver
-        unregisterReceiver(receiver);
+  unregisterReceiver(receiver);
     }
 
     @Override

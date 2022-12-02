@@ -10,7 +10,8 @@ import android.widget.Toast;
 public class Receiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-       // Toast.makeText(context, "Питание устройства отключено", Toast.LENGTH_SHORT).show();
+
+
 
         if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
             NetworkInfo networkInfo = intent.getParcelableExtra(ConnectivityManager.EXTRA_NETWORK_INFO);
