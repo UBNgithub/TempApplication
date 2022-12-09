@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
@@ -47,8 +48,12 @@ dependencies {
     //Room
     implementation "androidx.room:room-runtime:2.4.3"
     annotationProcessor "androidx.room:room-compiler:2.4.3"
+
     // FireBase
     implementation 'com.google.firebase:firebase-messaging:23.1.0'
+
+    // GoogleMap
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
 
 
 

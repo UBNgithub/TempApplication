@@ -33,6 +33,7 @@ import com.mygeekbranch.tempapplication.modelWeather.GetWeatherData;
 import com.mygeekbranch.tempapplication.modelWeather.GetWeatherRetrofit;
 import com.mygeekbranch.tempapplication.modelWeather.GetWeatherService;
 import com.mygeekbranch.tempapplication.modelWeather.GetWeatherWorker;
+import com.mygeekbranch.tempapplication.modelWeather.MapsFragment;
 import com.mygeekbranch.tempapplication.modelWeather.OkHttpRequest;
 import com.mygeekbranch.tempapplication.modelWeather.WeatherInit;
 
@@ -188,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onDestroy() {
         super.onDestroy();
         //Отписываемся от BroadcastReceiver
-  unregisterReceiver(receiver);
+        unregisterReceiver(receiver);
     }
 
     @Override
@@ -255,7 +256,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.navigation_about) {
             selectfragment = AboutFragment.newInstance(null, null);
 
+        } else if (id == R.id.navigation_map) {
+            selectfragment = new MapsFragment();
         }
+
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container_main, selectfragment)
