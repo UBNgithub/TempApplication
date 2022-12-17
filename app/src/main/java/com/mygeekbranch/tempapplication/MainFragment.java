@@ -64,6 +64,8 @@ public class MainFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
+
     public MainFragment() {
     }
 
@@ -138,6 +140,7 @@ public class MainFragment extends Fragment {
                 GetWeatherRetrofit.initRetrofit();
                 temp = Singleton.getSingleton().getTemperatureFloat();
                 mTemperature.setText(temp + " °");
+              //  updateMainFragment();
 
 
 
@@ -148,6 +151,15 @@ public class MainFragment extends Fragment {
         setImagePicasso();
 
 // использую поток чтобы обновить главный фрагмент
+        updateMainFragment();
+
+
+        initListWeekWeather();
+        initRecyclerView(view);
+        apdateAppBar();
+    }
+// Метод для обнавления главного потока с задержкой
+    private void updateMainFragment() {
         // т.к. запрос API происходит в отдельном потоке а View уже инициализировалась
         Handler handler = new Handler();
         Runnable runnable = new Runnable() {
@@ -162,18 +174,18 @@ public class MainFragment extends Fragment {
 
                     Log.d("Поток", "run: ");
                     Singleton.getSingleton().setMainFragmentCount(1);
+
                 }
+                temp = Singleton.getSingleton().getTemperatureFloat();
+                mTemperature.setText(temp + " °");
 
             }
         };
         handler.postDelayed(runnable, 900);
         // handler.post(runnable);
 
-
-        initListWeekWeather();
-        initRecyclerView(view);
-        apdateAppBar();
     }
+
 
     private void setImagePicasso() {
        // String iconImageWR = "10d";

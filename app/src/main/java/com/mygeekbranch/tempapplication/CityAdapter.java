@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mygeekbranch.tempapplication.dataBase.App;
+import com.mygeekbranch.tempapplication.modelWeather.GetWeatherRetrofit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +58,8 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
                     String city2 = (String) city.getText();
                     Toast.makeText(view.getContext(), city2, Toast.LENGTH_SHORT).show();
                     Singleton.getSingleton().setCurrentCity(city2);
+
+                    GetWeatherRetrofit.initRetrofit();
 
                     sharedPreferences = App.getInstance().getCitypreferences();
                     SharedPreferences.Editor editor = sharedPreferences.edit();

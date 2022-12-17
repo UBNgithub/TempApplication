@@ -55,10 +55,6 @@ dependencies {
     // GoogleMap
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
 
-
-
-
-
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0'
     implementation 'androidx.navigation:navigation-fragment:2.5.0'
