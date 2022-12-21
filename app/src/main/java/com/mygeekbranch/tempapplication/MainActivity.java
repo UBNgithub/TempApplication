@@ -260,6 +260,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.navigation_map) {
             //selectfragment = new MapsFragment();
             selectfragment = MapFragment.newInstance(null, null);
+        } else if (id == R.id.navigation_auth) {
+            //selectfragment = new MapsFragment();
+            selectfragment = AuthFragment.newInstance();
         }
 
 

@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "362362416080-t62ue864bpht65jts9iku2nnp4a1l3b6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mygeekbranch.tempapplication",
+            "certificate_hash": "e41b6508c6637263fa58f13206de30190b44dc99"
+          }
+        },
+        {
           "client_id": "362362416080-s0vc8qiq6fmk6ufjqa565udo6u1srarc.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -30,6 +30,9 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+
+
 }
 
 dependencies {
@@ -47,10 +50,13 @@ dependencies {
 
     //Room
     implementation "androidx.room:room-runtime:2.4.3"
+    implementation 'com.google.android.gms:play-services-auth:20.4.0'
+
     annotationProcessor "androidx.room:room-compiler:2.4.3"
 
     // FireBase
     implementation 'com.google.firebase:firebase-messaging:23.1.0'
+    implementation 'com.google.firebase:firebase-auth:21.1.0'
 
     // GoogleMap
     implementation 'com.google.android.gms:play-services-maps:18.1.0'

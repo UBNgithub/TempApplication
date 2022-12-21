@@ -129,7 +129,7 @@ public class MainFragment extends Fragment {
             public void onClick(View v) {
                 //Toast.makeText(getActivity(),"Set temp click", Toast.LENGTH_SHORT).show();
                // MainActivity.getInstance().startService(new Intent(getActivity(), GetWeatherService.class));
-                makeNote("Нотификация");
+                makeNote(getString(R.string.notification));
                 //MainActivity.getInstance().WeatherInit();
                 // GetUrlData.Init();
                // GetWeatherRetrofit.initRetrofit();
@@ -141,9 +141,6 @@ public class MainFragment extends Fragment {
                 temp = Singleton.getSingleton().getTemperatureFloat();
                 mTemperature.setText(temp + " °");
               //  updateMainFragment();
-
-
-
 
             }
         });
